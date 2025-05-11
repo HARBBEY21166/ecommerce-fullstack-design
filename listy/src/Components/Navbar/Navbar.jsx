@@ -27,7 +27,10 @@ const Navbar = () => {
       </div>
 
       <ul className="navbar_links">
-        <li><img src={profile} alt="" /><a href="#profile">Profile</a></li>
+        <li>
+          <img src={profile} alt="" />
+          <a href="#profile">Profile</a>
+          </li>
         <li><img src={message} alt="" /><a href="#message">Message</a></li>
         <li><img src={favorite} alt="" /><a href="#orders">Orders</a></li>
         <li><img src={cart} alt="" /><a href="#mycart">My cart</a></li>

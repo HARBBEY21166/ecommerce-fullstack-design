@@ -14,32 +14,42 @@
     color: #8CB7F5;
 }
 
-.navbar ul{
+.navbar_links{
     list-style: none;
     display: flex;
     gap: 20px;
 }
-.navbar ul li{
-    display:block;
+
+.navbar_links li{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 12px;
 }
-.navbar ul li:hover{
+
+.navbar_links li:hover{
     text-decoration: underline;
 }
-.navbar ul li.active{
+.navbar_links li.active{
     text-decoration: underline;
 }
-.navbar ul li.active:hover{
+
+.navbar_links li.active:hover{
     text-decoration: none;
 }
-.navbar ul li a{
+
+.navbar_links li a{
     text-decoration: none;
     color: inherit;
 }
-.navbar ul li a:hover{
+
+.navbar_links li a:hover{
     text-decoration: underline;
 }
-.navbar ul li a.active{
-    text-decoration: underline;
+
+.navbar_links img{
+    width: 20px;
+    height: 20px;
 }
+

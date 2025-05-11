@@ -1,0 +1,45 @@
+.navbar{
+    display:flex;
+    justify-content: space-around;
+    padding:16px;
+}
+
+.navbar_logo{
+    display:flex;
+    align-items: center;
+    gap:10px;
+}
+
+.navbar_logo h1{
+    color: #8CB7F5;
+}
+
+.navbar ul{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+.navbar ul li{
+    display:block;
+    cursor: pointer;
+    font-size: 18px;
+}
+.navbar ul li:hover{
+    text-decoration: underline;
+}
+.navbar ul li.active{
+    text-decoration: underline;
+}
+.navbar ul li.active:hover{
+    text-decoration: none;
+}
+.navbar ul li a{
+    text-decoration: none;
+    color: inherit;
+}
+.navbar ul li a:hover{
+    text-decoration: underline;
+}
+.navbar ul li a.active{
+    text-decoration: underline;
+}

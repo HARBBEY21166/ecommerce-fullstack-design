@@ -14,16 +14,16 @@ const Navbar = () => {
         <h1>Listy</h1>
       </div>
 
-      <div className="navbar__search">
-        <input type="text" placeholder="Search..." />
-        <select>
+      <div className="navbar_search">
+        <input type="text" placeholder="Search..." className="search_input" />
+        <select className="search_category">
           <option value="all">All Category</option>
           <option value="electronics">Electronics</option>
           <option value="fashion">Fashion</option>
           <option value="home">Home</option>
           <option value="books">Books</option>
           </select>
-        <button type="submit">Search</button>
+        <button type="submit" className="search_button">Search</button>
       </div>
 
       <ul className="navbar_links">

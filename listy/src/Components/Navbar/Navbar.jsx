@@ -15,7 +15,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar_search">
-        <input type="text" placeholder="Search..." className="search_input" />
+        <input type="text" placeholder="Search..." className="search_input" /><hr/>
         <select className="search_category">
           <option value="all">All Category</option>
           <option value="electronics">Electronics</option>
@@ -35,7 +35,16 @@ const Navbar = () => {
         <li><img src={favorite} alt="" /><a href="#orders">Orders</a></li>
         <li><img src={cart} alt="" /><a href="#mycart">My cart</a></li>
       </ul>
-    </div>
+    
+    <div className="navbar_underneth">
+      <ul className="navbar_links_underneth">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      </div>
+      </div>
   );
 }
 

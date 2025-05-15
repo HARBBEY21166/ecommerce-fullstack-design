@@ -4,6 +4,8 @@
     padding: 6px;
     box-shadow: 0 1px 3px -2px black;
     align-items: center;
+    width: 100%;
+    height: 86px;
 }
 
 .navbar_logo{
@@ -29,6 +31,7 @@
     cursor: pointer;
     font-size: 12px;
     font-weight: 500;
+    gap: 5px;
 }
 
 .navbar_links li:hover{
@@ -63,6 +66,7 @@
     display: flex;
     align-items: center;
     border-radius: 10px;
+    padding: 0;
 }
 
 .navbar_search .search_input{
@@ -72,6 +76,8 @@
     padding: 0 10px;
     font-size: 16px;
     font-weight: 500;
+    border-radius: 20px;
+    background-color: white;
 }
 
 .navbar_search .search_input:focus{
@@ -84,14 +90,23 @@
     font-weight: 400;
 }
 
+.navbar_search hr{
+    border: none;
+    width: 2px;
+    height: 40px;
+    background-color: #0D6EFD;
+    
+}
+
 .navbar_search .search_category{
     width: 145px;
     height: 40px;
-    border-left: 5px solid #0D6EFD;
+    /*border-left: 1px solid #0D6EFD;*/
     background-color: white;
     color: #1C1C1C;
     font-size: 16px;
     font-weight: 400;
+    border:none;
 }
 
 .navbar_search .search_category:focus{
@@ -106,6 +121,10 @@
     font-size: 16px;
     font-weight: 400;
     border: none;
-    border-radius:0 10px 10px 0;
+    border-radius:0 8px 8px 0;
     cursor: pointer;
+}
+
+.navbar_search .search_button:focus{
+    outline: none;
 }

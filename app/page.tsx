@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Header from "@/components/header"
+import MobileHeader from "@/components/mobile-header"
 import Footer from "@/components/footer"
 
 export default function Home() {
@@ -11,10 +12,17 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      {/* Desktop Header */}
+      <div className="hidden md:block">
+        <Header />
+      </div>
+
+      {/* Mobile Header */}
+      <MobileHeader />
+
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="bg-gray-100 py-6">
+        {/* Hero Section - Desktop */}
+        <section className="hidden md:block bg-gray-100 py-6">
           <div className="container mx-auto px-4 grid md:grid-cols-4 gap-4">
             <div className="bg-white p-4 rounded-md">
               <h3 className="font-semibold mb-2">Categories</h3>
@@ -125,28 +133,45 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Mobile Hero Section */}
+        <section className="md:hidden">
+          <div className="bg-gradient-to-r from-green-400 to-green-300 p-6 mx-4 my-4 rounded-lg relative overflow-hidden">
+            <div className="relative z-10">
+              <h2 className="text-white text-lg font-semibold mb-1">Latest trending</h2>
+              <h1 className="text-white text-xl font-bold mb-4">Electronic items</h1>
+              <Button variant="secondary" size="sm" asChild>
+                <Link href="/products?category=electronics">Learn more</Link>
+              </Button>
+            </div>
+            <div className="absolute right-0 top-0 h-full w-1/2">
+              <Image
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mobile-main.jpg-BXSA5enHTeQXVCOL1nyX6dLTFHCaKa.jpeg"
+                alt="Electronics"
+                fill
+                className="object-cover object-right"
+              />
+            </div>
+          </div>
+        </section>
+
         {/* Deals and Offers */}
         <section className="py-8">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-start mb-4">
               <div>
                 <h2 className="text-xl font-semibold">Deals and offers</h2>
-                <p className="text-sm text-gray-500">Hygiene equipments</p>
+                <p className="text-sm text-gray-500">Electronic equipments</p>
               </div>
               <div className="flex space-x-2 mt-2 md:mt-0">
-                <div className="bg-gray-100 p-2 rounded-md text-center min-w-[60px]">
-                  <p className="text-lg font-bold">04</p>
-                  <p className="text-xs">Days</p>
-                </div>
-                <div className="bg-gray-100 p-2 rounded-md text-center min-w-[60px]">
+                <div className="bg-gray-100 p-2 rounded-md text-center min-w-[50px] md:min-w-[60px]">
                   <p className="text-lg font-bold">13</p>
                   <p className="text-xs">Hour</p>
                 </div>
-                <div className="bg-gray-100 p-2 rounded-md text-center min-w-[60px]">
+                <div className="bg-gray-100 p-2 rounded-md text-center min-w-[50px] md:min-w-[60px]">
                   <p className="text-lg font-bold">34</p>
                   <p className="text-xs">Min</p>
                 </div>
-                <div className="bg-gray-100 p-2 rounded-md text-center min-w-[60px]">
+                <div className="bg-gray-100 p-2 rounded-md text-center min-w-[50px] md:min-w-[60px]">
                   <p className="text-lg font-bold">56</p>
                   <p className="text-xs">Sec</p>
                 </div>
@@ -233,13 +258,13 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Home and outdoor</h2>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/products?category=home">Source now</Link>
+              <Button variant="ghost" size="sm" asChild className="text-blue-600">
+                <Link href="/products?category=home">Source now →</Link>
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-              <div className="bg-white p-6 rounded-md flex items-center md:row-span-2">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="hidden md:block bg-white p-6 rounded-md flex items-center md:row-span-2">
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Home and outdoor</h3>
                   <Button variant="outline" size="sm" asChild>
@@ -256,30 +281,30 @@ export default function Home() {
               </div>
 
               {[
-                { name: "Soft chairs", category: "furniture" },
-                { name: "Sofa & chair", category: "furniture" },
-                { name: "Kitchen dishes", category: "home" },
-                { name: "Smart watches", category: "wearables" },
-                { name: "Kitchen mixer", category: "home-appliances" },
-                { name: "Blenders", category: "home-appliances" },
-                { name: "Home appliance", category: "home-appliances" },
-                { name: "Coffee maker", category: "home-appliances" },
+                { name: "Soft chairs", category: "furniture", price: "From USD 19" },
+                { name: "Sofa & chair", category: "furniture", price: "From USD 19" },
+                { name: "Kitchen dishes", category: "home", price: "From USD 19" },
+                { name: "Smart watches", category: "wearables", price: "From USD 19" },
+                { name: "Kitchen mixer", category: "home-appliances", price: "From USD 19" },
+                { name: "Blenders", category: "home-appliances", price: "From USD 19" },
+                { name: "Home appliance", category: "home-appliances", price: "From USD 19" },
+                { name: "Coffee maker", category: "home-appliances", price: "From USD 19" },
               ].map((item, i) => (
                 <Link
                   key={i}
                   href={`/products?category=${item.category}`}
-                  className="bg-white p-4 rounded-md flex items-center hover:shadow-md transition-shadow"
+                  className="bg-white p-3 md:p-4 rounded-md flex flex-col md:flex-row items-center hover:shadow-md transition-shadow"
                 >
-                  <div>
-                    <h3 className="text-sm font-medium mb-1">{item.name}</h3>
-                    <p className="text-xs text-gray-500">From USD 19</p>
+                  <div className="mb-2 md:mb-0 md:mr-3">
+                    <h3 className="text-sm font-medium mb-1 text-center md:text-left">{item.name}</h3>
+                    <p className="text-xs text-gray-500 text-center md:text-left">{item.price}</p>
                   </div>
                   <Image
-                    src="/placeholder.svg?height=80&width=80"
+                    src="/placeholder.svg?height=60&width=60"
                     alt="Product"
-                    width={80}
-                    height={80}
-                    className="ml-auto"
+                    width={60}
+                    height={60}
+                    className="md:ml-auto"
                   />
                 </Link>
               ))}
@@ -291,14 +316,14 @@ export default function Home() {
         <section className="py-8">
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Consumer electronics and gadgets</h2>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/products?category=electronics">Source now</Link>
+              <h2 className="text-xl font-semibold">Consumer electronics</h2>
+              <Button variant="ghost" size="sm" asChild className="text-blue-600">
+                <Link href="/products?category=electronics">Source now →</Link>
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-              <div className="bg-white p-6 rounded-md flex items-center md:row-span-2">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="hidden md:block bg-white p-6 rounded-md flex items-center md:row-span-2">
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Consumer electronics and gadgets</h3>
                   <Button variant="outline" size="sm" asChild>
@@ -315,30 +340,30 @@ export default function Home() {
               </div>
 
               {[
-                { name: "Smart watches", category: "wearables" },
-                { name: "Cameras", category: "electronics" },
-                { name: "Headphones", category: "audio" },
-                { name: "Smart watches", category: "wearables" },
-                { name: "Gaming set", category: "gaming" },
-                { name: "Laptops & PC", category: "computers" },
-                { name: "Smartphones", category: "smartphones" },
-                { name: "Electric kettle", category: "home-appliances" },
+                { name: "Smart watches", category: "wearables", price: "From USD 19" },
+                { name: "Cameras", category: "electronics", price: "From USD 19" },
+                { name: "Headphones", category: "audio", price: "From USD 19" },
+                { name: "Smart watches", category: "wearables", price: "From USD 19" },
+                { name: "Gaming set", category: "gaming", price: "From USD 19" },
+                { name: "Laptops & PC", category: "computers", price: "From USD 19" },
+                { name: "Smartphones", category: "smartphones", price: "From USD 19" },
+                { name: "Electric kettle", category: "home-appliances", price: "From USD 19" },
               ].map((item, i) => (
                 <Link
                   key={i}
                   href={`/products?category=${item.category}`}
-                  className="bg-white p-4 rounded-md flex items-center hover:shadow-md transition-shadow"
+                  className="bg-white p-3 md:p-4 rounded-md flex flex-col md:flex-row items-center hover:shadow-md transition-shadow"
                 >
-                  <div>
-                    <h3 className="text-sm font-medium mb-1">{item.name}</h3>
-                    <p className="text-xs text-gray-500">From USD 19</p>
+                  <div className="mb-2 md:mb-0 md:mr-3">
+                    <h3 className="text-sm font-medium mb-1 text-center md:text-left">{item.name}</h3>
+                    <p className="text-xs text-gray-500 text-center md:text-left">{item.price}</p>
                   </div>
                   <Image
-                    src="/placeholder.svg?height=80&width=80"
+                    src="/placeholder.svg?height=60&width=60"
                     alt="Product"
-                    width={80}
-                    height={80}
-                    className="ml-auto"
+                    width={60}
+                    height={60}
+                    className="md:ml-auto"
                   />
                 </Link>
               ))}
@@ -351,18 +376,18 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8">
               <div className="flex flex-col justify-center">
-                <h2 className="text-2xl font-bold mb-2">An easy way to send requests to all suppliers</h2>
-                <p className="mb-4">
+                <h2 className="text-xl md:text-2xl font-bold mb-2">An easy way to send requests to all suppliers</h2>
+                <p className="mb-4 text-sm md:text-base">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-md text-gray-800">
+              <div className="bg-white p-4 md:p-6 rounded-md text-gray-800">
                 <h3 className="font-semibold mb-4">Send quote to suppliers</h3>
                 <form className="space-y-4">
                   <Input placeholder="What item you need?" />
                   <textarea
-                    className="w-full p-2 border rounded-md"
+                    className="w-full p-2 border rounded-md text-sm"
                     rows={3}
                     placeholder="Type more details"
                   ></textarea>
@@ -399,15 +424,15 @@ export default function Home() {
                   className="bg-white border rounded-md overflow-hidden hover:shadow-md transition-shadow"
                 >
                   <Image
-                    src="/placeholder.svg?height=150&width=150"
+                    src="/placeholder.svg?height=120&width=120"
                     alt="Product"
-                    width={150}
-                    height={150}
-                    className="w-full h-40 object-cover"
+                    width={120}
+                    height={120}
+                    className="w-full h-24 md:h-32 object-cover"
                   />
-                  <div className="p-3">
-                    <p className="font-semibold">${(Math.random() * 100).toFixed(2)}</p>
-                    <p className="text-xs text-gray-600 mt-1">
+                  <div className="p-2 md:p-3">
+                    <p className="font-semibold text-sm md:text-base">${(Math.random() * 100).toFixed(2)}</p>
+                    <p className="text-xs text-gray-600 mt-1 line-clamp-2">
                       {
                         [
                           "T-shirts with multiple colors, for men",
@@ -426,78 +451,6 @@ export default function Home() {
                   </div>
                 </Link>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Services */}
-        <section className="py-8 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-xl font-semibold mb-4">Our extra services</h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              {[
-                { title: "Source from Industry Hubs", icon: "🏭" },
-                { title: "Customize Your Products", icon: "🛠️" },
-                { title: "Fast, reliable shipping by ocean or air", icon: "✈️" },
-                { title: "Product monitoring and inspection", icon: "🔍" },
-              ].map((service, i) => (
-                <div key={i} className="bg-white p-4 rounded-md relative">
-                  <Image
-                    src="/placeholder.svg?height=150&width=250"
-                    alt={service.title}
-                    width={250}
-                    height={150}
-                    className="w-full h-32 object-cover rounded-md mb-3"
-                  />
-                  <h3 className="font-medium">{service.title}</h3>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Suppliers by Region */}
-        <section className="py-8">
-          <div className="container mx-auto px-4">
-            <h2 className="text-xl font-semibold mb-4">Suppliers by region</h2>
-
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              {[
-                { country: "Arabic Emirates", flag: "🇦🇪", companies: "shopname.ae" },
-                { country: "Australia", flag: "🇦🇺", companies: "shopname.au" },
-                { country: "United States", flag: "🇺🇸", companies: "shopname.com" },
-                { country: "Russia", flag: "🇷🇺", companies: "shopname.ru" },
-                { country: "Italy", flag: "🇮🇹", companies: "shopname.it" },
-                { country: "Denmark", flag: "🇩🇰", companies: "shopname.com.dk" },
-                { country: "France", flag: "🇫🇷", companies: "shopname.com.fr" },
-                { country: "Arabic Emirates", flag: "🇦🇪", companies: "shopname.ae" },
-                { country: "China", flag: "🇨🇳", companies: "shopname.cn" },
-                { country: "Great Britain", flag: "🇬🇧", companies: "shopname.co.uk" },
-              ].map((region, i) => (
-                <div key={i} className="flex items-center space-x-2">
-                  <span className="text-2xl">{region.flag}</span>
-                  <div>
-                    <p className="text-sm font-medium">{region.country}</p>
-                    <p className="text-xs text-gray-500">{region.companies}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Newsletter */}
-        <section className="py-8 bg-gray-100">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-xl font-semibold mb-2">Subscribe on our newsletter</h2>
-            <p className="text-sm text-gray-600 mb-4">
-              Get daily news on upcoming offers from many suppliers all over the world
-            </p>
-
-            <div className="flex flex-col md:flex-row justify-center items-center gap-2 max-w-md mx-auto">
-              <Input placeholder="Email" className="w-full md:w-auto" />
-              <Button>Subscribe</Button>
             </div>
           </div>
         </section>

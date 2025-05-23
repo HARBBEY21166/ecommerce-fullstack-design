@@ -1,0 +1,124 @@
+{
+  "products": {
+    "product-1": {
+      "name": "GoPro HERO6 4K Action Camera - Black",
+      "price": 99.5,
+      "description": "Capture your adventures in stunning 4K resolution with the GoPro HERO6. This action camera is waterproof, shockproof, and ready for any adventure. Features include voice control, touch display, and advanced image stabilization.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Electronics",
+      "stock": 25
+    },
+    "product-2": {
+      "name": "Canon Camera EOS 2000 Black 10x zoom",
+      "price": 998.0,
+      "description": "Professional-grade DSLR camera with 10x optical zoom, 24.1MP sensor, and 4K video recording capabilities. Includes built-in Wi-Fi and Bluetooth for easy sharing.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Electronics",
+      "stock": 15
+    },
+    "product-3": {
+      "name": "Apple MacBook Pro 16-inch",
+      "price": 1299.99,
+      "description": "Powerful laptop featuring Apple M1 Pro chip, 16GB RAM, 512GB SSD, and a stunning 16-inch Retina display. Perfect for creative professionals and power users.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Computers",
+      "stock": 10
+    },
+    "product-4": {
+      "name": "Wireless Headphones - Silver",
+      "price": 99.5,
+      "description": "Premium wireless headphones with active noise cancellation, 30-hour battery life, and comfortable over-ear design. Features high-resolution audio and built-in microphone for calls.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Audio",
+      "stock": 30
+    },
+    "product-5": {
+      "name": "Smart Watch Series 5 - Silver",
+      "price": 199.5,
+      "description": "Advanced smartwatch with health monitoring features, GPS, always-on display, and water resistance up to 50 meters. Compatible with iOS and Android devices.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Wearables",
+      "stock": 20
+    },
+    "product-6": {
+      "name": "Men's Long Sleeve T-shirt Cotton Base Layer",
+      "price": 78.0,
+      "description": "Premium cotton t-shirt designed for comfort and durability. Features a slim fit design, breathable fabric, and is available in multiple colors and sizes.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Clothing",
+      "stock": 50
+    },
+    "product-7": {
+      "name": "Leather Wallet - Brown",
+      "price": 45.99,
+      "description": "Genuine leather wallet with multiple card slots, bill compartment, and RFID blocking technology. Slim design fits comfortably in pocket.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Accessories",
+      "stock": 40
+    },
+    "product-8": {
+      "name": "Electric Kettle - Black",
+      "price": 35.5,
+      "description": "Fast-boiling electric kettle with 1.7L capacity, auto shut-off feature, and boil-dry protection. Cordless design for easy pouring.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Home Appliances",
+      "stock": 35
+    },
+    "product-9": {
+      "name": "Denim Jeans - Blue",
+      "price": 59.99,
+      "description": "Classic denim jeans with comfortable stretch fabric, five-pocket styling, and durable construction. Available in multiple sizes and washes.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Clothing",
+      "stock": 45
+    },
+    "product-10": {
+      "name": "Backpack - Blue",
+      "price": 89.0,
+      "description": "Durable backpack with laptop compartment, multiple pockets, and water-resistant material. Perfect for school, work, or travel.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Bags",
+      "stock": 30
+    },
+    "product-11": {
+      "name": "Coffee Maker - Black",
+      "price": 65.95,
+      "description": "Programmable coffee maker with 12-cup capacity, auto shut-off, and brew strength control. Includes reusable filter and anti-drip system.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Home Appliances",
+      "stock": 25
+    },
+    "product-12": {
+      "name": "Winter Coat - Brown",
+      "price": 129.5,
+      "description": "Warm winter coat with water-resistant outer shell, insulated lining, and adjustable hood. Features multiple pockets and durable zipper closure.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Clothing",
+      "stock": 20
+    },
+    "product-13": {
+      "name": "iPhone 12 - Red",
+      "price": 699.0,
+      "description": "Latest iPhone with A14 Bionic chip, dual-camera system, and 5G capability. Features 6.1-inch Super Retina XDR display and Face ID.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Smartphones",
+      "stock": 18
+    },
+    "product-14": {
+      "name": "Samsung Galaxy Tab S7",
+      "price": 549.99,
+      "description": "Premium Android tablet with 11-inch display, S Pen included, and powerful Snapdragon processor. Perfect for productivity and entertainment.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Tablets",
+      "stock": 22
+    },
+    "product-15": {
+      "name": "Gaming Headset - Black",
+      "price": 79.99,
+      "description": "Professional gaming headset with 7.1 surround sound, noise-canceling microphone, and comfortable over-ear design. Compatible with PC, PS5, and Xbox.",
+      "image": "/placeholder.svg?height=300&width=300",
+      "category": "Gaming",
+      "stock": 35
+    }
+  }
+}

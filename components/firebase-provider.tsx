@@ -9,14 +9,14 @@ import { getDatabase } from "firebase/database"
 import { getStorage } from "firebase/storage"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAA__9DDwszmGls8Rk0Apyw1ek0rlCkixI",
-  authDomain: "ecommerce-backend-c8553.firebaseapp.com",
-  databaseURL: "https://ecommerce-backend-c8553-default-rtdb.firebaseio.com",
-  projectId: "ecommerce-backend-c8553",
-  storageBucket: "ecommerce-backend-c8553.firebasestorage.app",
-  messagingSenderId: "280684538093",
-  appId: "1:280684538093:web:7d0c5724c7ffd9d04444e4",
-  measurementId: "G-PMZLP5N4JQ",
+  apiKey: "AIzaSyBUgx20HJrk5nx1-CkiNwN7b7UZfpwG_Vk",
+  authDomain: "ecommerce-33698.firebaseapp.com",
+  databaseURL: "https://ecommerce-33698-default-rtdb.firebaseio.com/",
+  projectId: "ecommerce-33698",
+  storageBucket: "ecommerce-33698.firebasestorage.app",
+  messagingSenderId: "572182771672",
+  appId: "1:572182771672:web:e388db3327bf1d627724ad",
+  measurementId: "G-ZCQP18CKWP"
 }
 
 type FirebaseContextType = {

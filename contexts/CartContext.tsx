@@ -1,9 +1,10 @@
+//contexts/CartContext.tsx
 "use client";
 
 import type { ReactNode } from "react";
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import type { CartItem, Product } from "@/lib/types";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast"
 
 interface CartContextType {
   cartItems: CartItem[];
@@ -17,27 +18,25 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const getInitialCart = (): CartItem[] => {
-  if (typeof window !== "undefined") {
-    const storedCart = localStorage.getItem("shopstream-cart");
-    return storedCart ? JSON.parse(storedCart) : [];
-  }
-  return [];
-};
+import {
+  getCartItems as fetchCartItemsFromService,
+  addToCart as addItemToServiceCart,
+  removeFromCart as removeItemFromServiceCart,
+  updateCartItemQuantity as updateItemQuantityInService,
+  clearCart as clearServiceCart,
+} from "@/lib/service/cart";
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const { toast } = useToast();
 
   useEffect(() => {
-    setCartItems(getInitialCart());
-  }, []);
-  
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("shopstream-cart", JSON.stringify(cartItems));
-    }
-  }, [cartItems]);
+    const fetchCartItems = async () => {
+      const items = await fetchCartItemsFromService();
+      setCartItems(items);
+    };
+    fetchCartItems();
+  }, []); // Fetch cart items on initial load
 
   const addToCart = useCallback((product: Product, quantity: number = 1) => {
     setCartItems((prevItems) => {

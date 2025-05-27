@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { useFirebase } from "@/components/firebase-provider"
+import { useAuth } from "@/hooks/useAuth";
 
 export default function AnalyticsPage() {
   const [analytics, setAnalytics] = useState({
@@ -19,7 +19,7 @@ export default function AnalyticsPage() {
     salesData: [],
   })
   const [loading, setLoading] = useState(true)
-  const { user } = useFirebase()
+  const { user } = useAuth()
 
   useEffect(() => {
     // Mock analytics data

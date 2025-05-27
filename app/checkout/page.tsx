@@ -12,9 +12,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Separator } from "@/components/ui/separator"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { useFirebase } from "@/components/firebase-provider"
-import { getCartItems, clearCart } from "@/lib/firebase/cart"
-import { createOrder } from "@/lib/firebase/orders"
+import { useAuth } from "@/hooks/useAuth";
+import { getCartItems, clearCart } from "@/lib/service/cart"
+import { createOrder } from "@/lib/service/orders"
 
 interface CartItem {
   id: string
@@ -36,7 +36,7 @@ export default function CheckoutPage() {
   const [completedOrderNumber, setCompletedOrderNumber] = useState("")
   const [paymentMethod, setPaymentMethod] = useState("card")
   const [shippingMethod, setShippingMethod] = useState("standard")
-  const { user } = useFirebase()
+  const { user } = useAuth()
 
   const [billingInfo, setBillingInfo] = useState({
     firstName: "",

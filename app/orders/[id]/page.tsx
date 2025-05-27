@@ -10,11 +10,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { useFirebase } from "@/components/firebase-provider"
-import { getOrderById } from "@/lib/firebase/orders"
+import { useAuth } from "@/hooks/useAuth";
+import { getOrderById } from "@/lib/service/orders"
 
 export default function OrderDetailPage({ params }: { params: { id: string } }) {
-  const { user, loading } = useFirebase()
+  const { user, loading } = useAuth()
   const [order, setOrder] = useState<any>(null)
   const [loadingOrder, setLoadingOrder] = useState(true)
   const [error, setError] = useState<string | null>(null)

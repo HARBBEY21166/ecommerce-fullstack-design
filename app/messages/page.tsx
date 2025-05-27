@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { useFirebase } from "@/components/firebase-provider"
-
+import { useAuth } from "@/hooks/useAuth";
 export default function MessagesPage() {
-  const { user, loading } = useFirebase()
+  const { user, loading } = useAuth()
 
   if (loading) {
     return (

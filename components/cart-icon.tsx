@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ShoppingCart } from "lucide-react"
-import { useFirebase } from "./firebase-provider"
-import { getCartItems } from "@/lib/firebase/cart"
+import { useAuth } from "@/hooks/useAuth";
+import { getCartItems } from "@/lib/service/cart"
 
 export default function CartIcon() {
   const [cartCount, setCartCount] = useState(0)
   const [loading, setLoading] = useState(true)
-  const { user } = useFirebase()
+  const { user } = useAuth()
 
   useEffect(() => {
     const fetchCartCount = async () => {

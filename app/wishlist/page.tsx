@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { useFirebase } from "@/components/firebase-provider"
-import { getProducts } from "@/lib/firebase/products"
+import { useAuth } from "@/hooks/useAuth";
+import { getProducts } from "@/lib/service/products"
 
 interface WishlistItem {
   id: string
@@ -21,7 +21,7 @@ export default function WishlistPage() {
   const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([])
   const [products, setProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-  const { user } = useFirebase()
+  const { user } = useAuth()
 
   useEffect(() => {
     const fetchData = async () => {

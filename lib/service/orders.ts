@@ -1,4 +1,4 @@
-import { database } from "@/components/firebase-provider"
+import { db } from "@/lib/firebase"
 import { ref, get, set, push } from "firebase/database"
 
 export interface Order {
@@ -19,7 +19,7 @@ export interface Order {
 // Create a new order
 export async function createOrder(orderData: Omit<Order, "id">): Promise<string> {
   try {
-    const ordersRef = ref(database, "orders")
+    const ordersRef = ref(db, "orders")
     const newOrderRef = push(ordersRef)
     await set(newOrderRef, orderData)
     return newOrderRef.key as string
@@ -32,7 +32,7 @@ export async function createOrder(orderData: Omit<Order, "id">): Promise<string>
 // Get all orders
 export async function getAllOrders(): Promise<Order[]> {
   try {
-    const ordersRef = ref(database, "orders")
+    const ordersRef = ref(db, "orders")
     const snapshot = await get(ordersRef)
 
     if (snapshot.exists()) {
@@ -71,7 +71,7 @@ export async function getUserOrders(userId: string): Promise<Order[]> {
 // Get order by ID
 export async function getOrderById(orderId: string): Promise<Order | null> {
   try {
-    const orderRef = ref(database, `orders/${orderId}`)
+    const orderRef = ref(db, `orders/${orderId}`)
     const snapshot = await get(orderRef)
 
     if (snapshot.exists()) {
@@ -91,7 +91,7 @@ export async function getOrderById(orderId: string): Promise<Order | null> {
 // Update order status
 export async function updateOrderStatus(orderId: string, status: string): Promise<void> {
   try {
-    const orderRef = ref(database, `orders/${orderId}/status`)
+    const orderRef = ref(db, `orders/${orderId}/status`)
     await set(orderRef, status)
   } catch (error) {
     console.error(`Error updating order status for ID ${orderId}:`, error)

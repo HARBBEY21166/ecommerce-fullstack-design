@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Header from "@/components/header"
-import MobileHeader from "@/components/mobile-header"
 import Footer from "@/components/footer"
 
 export default function Home() {
@@ -16,9 +15,6 @@ export default function Home() {
       <div className="hidden md:block">
         <Header />
       </div>
-
-      {/* Mobile Header */}
-      <MobileHeader />
 
       <main className="flex-1">
         {/* Hero Section - Desktop */}

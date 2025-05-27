@@ -3,7 +3,10 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import FirebaseProvider from "@/components/firebase-provider"
+import { AuthProvider } from "@/contexts/AuthContext";
+import { CartProvider } from "@/contexts/CartContext";
+import { WishlistProvider } from "@/contexts/WishlistContext";
+
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -22,7 +25,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light">
-          <FirebaseProvider>{children}</FirebaseProvider>
+          <AuthProvider>
+          <CartProvider>
+            <WishlistProvider>
+           <main className="flex-grow">{children}</main>
+            </WishlistProvider>
+          </CartProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

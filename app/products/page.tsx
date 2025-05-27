@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Slider } from "@/components/ui/slider"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { getProducts } from "@/lib/firebase/products"
+import { getProducts } from "@/lib/service/products"
 
 export default function ProductsPage() {
   const router = useRouter()

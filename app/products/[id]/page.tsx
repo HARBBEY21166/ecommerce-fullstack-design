@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import AddToCartButton from "@/components/add-to-cart-button"
-import { getProductById, getRelatedProducts } from "@/lib/firebase/products"
+import { getProductById, getRelatedProducts } from "@/lib/service/products"
 
 export default async function ProductDetailPage({ params }: { params: { id: string } }) {
-  const product = await getProductById(params.id)
+  // Await the params to ensure they're ready to be used
+  const { id } = await params; // Awaiting here may not be necessary if 'params' is already resolved
+  const product = await getProductById(id);
   const relatedProducts = await getRelatedProducts(product?.category || "")
 
   if (!product) {

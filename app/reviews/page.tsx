@@ -12,8 +12,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { useFirebase } from "@/components/firebase-provider"
-import { getProducts } from "@/lib/firebase/products"
+import { useAuth } from "@/hooks/useAuth";
+import { getProducts } from "@/lib/service/products"
 
 interface Review {
   id: string
@@ -33,7 +33,7 @@ export default function ReviewsPage() {
   const [loading, setLoading] = useState(true)
   const [newReview, setNewReview] = useState({ rating: 5, comment: "" })
   const [selectedProduct, setSelectedProduct] = useState("")
-  const { user } = useFirebase()
+  const { user } = useAuth()
 
   useEffect(() => {
     const fetchData = async () => {

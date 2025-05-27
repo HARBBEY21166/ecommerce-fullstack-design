@@ -9,11 +9,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { useFirebase } from "@/components/firebase-provider"
-import { getUserOrders } from "@/lib/firebase/orders"
+import { useAuth } from "@/hooks/useAuth";
+import { getUserOrders } from "@/lib/service/orders"
 
 export default function OrdersPage() {
-  const { user, loading } = useFirebase()
+  const { user, loading } = useAuth()
   const [orders, setOrders] = useState([])
   const [loadingOrders, setLoadingOrders] = useState(true)
 

@@ -6,9 +6,8 @@ import Link from "next/link"
 import { ArrowLeft, Minus, Plus, MoreVertical } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Header from "@/components/header"
-import MobileHeader from "@/components/mobile-header"
 import Footer from "@/components/footer"
-import { getCartItems, updateCartItemQuantity, removeFromCart, getSavedItems, moveToCart } from "@/lib/firebase/cart"
+import { getCartItems, updateCartItemQuantity, removeFromCart, getSavedItems, moveToCart } from "@/lib/service/cart"
 
 interface CartItem {
   id: string
@@ -108,7 +107,7 @@ export default function CartPage() {
         <div className="hidden md:block">
           <Header />
         </div>
-        <MobileHeader />
+        
         <main className="flex-1 flex items-center justify-center">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
         </main>
@@ -123,9 +122,6 @@ export default function CartPage() {
       <div className="hidden md:block">
         <Header />
       </div>
-
-      {/* Mobile Header */}
-      <MobileHeader />
 
       <main className="flex-1 bg-gray-50">
         {/* Mobile Cart Header */}

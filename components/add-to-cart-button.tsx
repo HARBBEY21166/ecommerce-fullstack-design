@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useFirebase } from "./firebase-provider"
-import { addToCart } from "@/lib/firebase/cart"
+import { useAuth } from "@/hooks/useAuth";
+import { addToCart } from "@/lib/service/cart"
 import { cn } from "@/lib/utils"
 
 interface Product {
@@ -22,7 +22,7 @@ interface AddToCartButtonProps {
 export default function AddToCartButton({ product, className }: AddToCartButtonProps) {
   const [loading, setLoading] = useState(false)
   const [added, setAdded] = useState(false)
-  const { user } = useFirebase()
+  const { user } = useAuth()
 
   const handleAddToCart = async () => {
     if (!user) {

@@ -1,4 +1,4 @@
-import { database } from "@/components/firebase-provider"
+import { db } from "@/lib/firebase"
 import { ref, get, set, push, remove } from "firebase/database"
 
 export interface Product {
@@ -14,7 +14,7 @@ export interface Product {
 // Get all products
 export async function getProducts(): Promise<Product[]> {
   try {
-    const productsRef = ref(database, "products")
+    const productsRef = ref(db, "products")
     const snapshot = await get(productsRef)
 
     if (snapshot.exists()) {
@@ -35,7 +35,7 @@ export async function getProducts(): Promise<Product[]> {
 // Get product by ID
 export async function getProductById(id: string): Promise<Product | null> {
   try {
-    const productRef = ref(database, `products/${id}`)
+    const productRef = ref(db, `products/${id}`)
     const snapshot = await get(productRef)
 
     if (snapshot.exists()) {
@@ -85,7 +85,7 @@ export async function getRelatedProducts(category: string): Promise<Product[]> {
 // Create a new product
 export async function createProduct(product: Omit<Product, "id">): Promise<string> {
   try {
-    const productsRef = ref(database, "products")
+    const productsRef = ref(db, "products")
     const newProductRef = push(productsRef)
     await set(newProductRef, product)
     return newProductRef.key as string
@@ -98,7 +98,7 @@ export async function createProduct(product: Omit<Product, "id">): Promise<strin
 // Update a product
 export async function updateProduct(id: string, updates: Partial<Omit<Product, "id">>): Promise<void> {
   try {
-    const productRef = ref(database, `products/${id}`)
+    const productRef = ref(db, `products/${id}`)
     const snapshot = await get(productRef)
 
     if (snapshot.exists()) {
@@ -119,7 +119,7 @@ export async function updateProduct(id: string, updates: Partial<Omit<Product, "
 // Delete a product
 export async function deleteProduct(id: string): Promise<void> {
   try {
-    const productRef = ref(database, `products/${id}`)
+    const productRef = ref(db, `products/${id}`)
     await remove(productRef)
   } catch (error) {
     console.error(`Error deleting product with ID ${id}:`, error)

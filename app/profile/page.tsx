@@ -11,12 +11,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { useFirebase } from "@/components/firebase-provider"
-import { auth } from "@/components/firebase-provider"
+import { useAuth } from "@/hooks/useAuth";
+import { auth } from "@/lib/firebase"
 import { updateProfile } from "firebase/auth"
 
 export default function ProfilePage() {
-  const { user, loading } = useFirebase()
+  const { user, loading } = useAuth()
   const [displayName, setDisplayName] = useState("")
   const [updating, setUpdating] = useState(false)
   const [message, setMessage] = useState("")

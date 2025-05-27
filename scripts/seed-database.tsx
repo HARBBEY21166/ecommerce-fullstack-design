@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { database } from "@/components/firebase-provider"
+import { db } from "@/lib/firebase"
 import { ref, set } from "firebase/database"
 
 // Sample product data
@@ -138,7 +138,7 @@ export default function SeedDatabase() {
       })
 
       // Set the products in Firebase
-      const productsRef = ref(database, "products")
+      const productsRef = ref(db, "products")
       await set(productsRef, productsData)
 
       setSuccess(true)

@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { auth } from "@/components/firebase-provider"
+import { auth } from "@/lib/firebase" // Adjust the import path as necessary
 import { signInWithEmailAndPassword } from "firebase/auth"
 
 export default function LoginPage() {

@@ -1,212 +1,299 @@
-"use client"
 
-import Link from "next/link"
-import { useState } from "react"
-import { usePathname } from "next/navigation"
-import { User, MessageSquare, Heart, ChevronDown, Menu } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { useFirebase } from "./firebase-provider"
-import { cn } from "@/lib/utils"
-import { auth } from "./firebase-provider"
-import CartIcon from "./cart-icon"
+"use client";
 
-export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const pathname = usePathname()
-  const { user } = useFirebase()
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useCart } from "@/hooks/useCart";
+import { useAuth } from "@/hooks/useAuth";
+import { auth as firebaseAuth } from "@/lib/firebase";
+import { signOut } from "firebase/auth";
+import { cn } from "@/lib/utils";
+import {
+  Search,
+  ShoppingCart,
+  Heart,
+  User,
+  MessageSquare,
+  Menu,
+  ChevronDown,
+  Package, // Using Package as a generic brand icon for now
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
 
-  const categories = [
-    { name: "All category", href: "/" },
-    { name: "Hot offers", href: "/hot-offers" },
-    { name: "Gift boxes", href: "/gift-boxes" },
-    { name: "Projects", href: "/projects" },
-    { name: "Menu item", href: "/menu-item" },
-    { name: "Help", href: "/help", hasDropdown: true },
-  ]
+const Header = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const { itemCount } = useCart();
+  const { user } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  return (
-    <header className="border-b">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Link href="/" className="flex items-center">
-              <div className="flex h-10 w-10 items-center justify-center rounded-md bg-blue-500 text-white">
-                <span className="text-xl font-bold">B</span>
-              </div>
-              <span className="ml-2 text-xl font-semibold text-blue-500">Brand</span>
-            </Link>
-          </div>
+  const mainCategories = [
+    { name: "All category", href: "/products" },
+    { name: "Hot offers", href: "/products?tag=hot-offers" },
+    { name: "Gift boxes", href: "/products?category=gifts" },
+    { name: "Projects", href: "/products?category=projects" },
+    { name: "Menu item", href: "/products?tag=new" }, // Example
+  ];
 
-          <div className="hidden md:flex items-center flex-1 max-w-xl mx-4">
-            <div className="relative w-full">
-              <Input type="search" placeholder="Search" className="pr-10 rounded-r-none border-r-0" />
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="rounded-l-none border-l-0">
-                    All category <ChevronDown className="ml-2 h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>Electronics</DropdownMenuItem>
-                  <DropdownMenuItem>Clothing</DropdownMenuItem>
-                  <DropdownMenuItem>Home & Garden</DropdownMenuItem>
-                  <DropdownMenuItem>Sports</DropdownMenuItem>
-                  <DropdownMenuItem>Toys</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+      setIsMobileMenuOpen(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(firebaseAuth);
+      router.push("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  const CartActionIcon = () => (
+    <Link href="/cart" className="relative flex flex-col items-center text-xs text-foreground/80 hover:text-primary">
+      <ShoppingCart className="h-5 w-5 mb-0.5" />
+      <span>My cart</span>
+      {itemCount > 0 && (
+        <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 p-0 flex items-center justify-center text-xs">
+          {itemCount}
+        </Badge>
+      )}
+    </Link>
+  );
+
+  const UserActionIcon = () => {
+    if (user) {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <div className="flex flex-col items-center text-xs text-foreground/80 hover:text-primary cursor-pointer">
+              <User className="h-5 w-5 mb-0.5" />
+              <span>{user.displayName?.split(' ')[0] || "Profile"}</span>
             </div>
-            <Button className="ml-2">Search</Button>
-          </div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem asChild>
+              <Link href="/profile">My Profile</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/admin">Admin Panel</Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleSignOut}>Logout</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    }
+    return (
+      <Link href="/login" className="flex flex-col items-center text-xs text-foreground/80 hover:text-primary">
+        <User className="h-5 w-5 mb-0.5" />
+        <span>Login</span>
+      </Link>
+    );
+  };
 
-          <div className="flex items-center space-x-4">
-            {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <div className="hidden sm:flex flex-col items-center text-xs cursor-pointer">
-                    <User className="h-5 w-5 mb-1" />
-                    <span>{user.displayName || "User"}</span>
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
-                    <Link href="/profile">My Profile</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/admin/dashboard">Admin Panel</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => auth.signOut()}>Logout</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <Link href="/auth/login" className="hidden sm:flex flex-col items-center text-xs">
-                <User className="h-5 w-5 mb-1" />
-                <span>Login</span>
-              </Link>
-            )}
-            <Link href="/messages" className="hidden sm:flex flex-col items-center text-xs">
-              <MessageSquare className="h-5 w-5 mb-1" />
+  // Top Bar (Secondary Nav from description: Language and Shipping)
+  const TopBar = () => (
+    <div className="bg-muted/50 py-1.5 text-xs text-muted-foreground hidden md:block">
+      <div className="container mx-auto px-4 flex justify-end items-center space-x-4">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm" className="text-xs p-1 h-auto hover:bg-transparent hover:text-primary">
+              English, USD <ChevronDown className="ml-1 h-3 w-3" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>English, USD</DropdownMenuItem>
+            <DropdownMenuItem>Español, EUR</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm" className="text-xs p-1 h-auto hover:bg-transparent hover:text-primary">
+              Ship to <span className="mx-1">🇩🇪</span> {/* Placeholder flag */}
+              <ChevronDown className="ml-1 h-3 w-3" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>Germany 🇩🇪</DropdownMenuItem>
+            <DropdownMenuItem>United States 🇺🇸</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </div>
+  );
+
+  // Main Navigation: Logo, SearchBar, UserActions (Section 1 from description)
+  const MainNav = () => (
+    <div className="container mx-auto px-4 py-3">
+      <div className="flex items-center justify-between">
+        <Link href="/" className="flex items-center">
+          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
+            {/* Blue brand logo with "B" */}
+            <span className="text-xl font-bold">B</span>
+          </div>
+          <span className="ml-2 text-xl font-semibold text-primary">Brand</span> {/* Brand name */}
+        </Link>
+
+        {/* Desktop Search Bar */}
+        <div className="hidden md:flex items-center flex-1 max-w-xl mx-4">
+          <form onSubmit={handleSearchSubmit} className="relative w-full flex">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="rounded-r-none border-r-0 px-3 hover:bg-accent">
+                  All category <ChevronDown className="ml-1 h-4 w-4 opacity-70" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem onSelect={() => console.log("Category: Electronics")}>Electronics</DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => console.log("Category: Apparel")}>Apparel</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Input
+              type="search"
+              placeholder="Search"
+              className="rounded-none focus:border-primary focus:ring-primary"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Button type="submit" className="rounded-l-none bg-primary hover:bg-primary/90">
+              <Search className="h-4 w-4 md:mr-2" />
+              <span className="hidden md:inline">Search</span>
+            </Button>
+          </form>
+        </div>
+
+        {/* User Actions & Mobile Menu Trigger */}
+        <div className="flex items-center space-x-3 sm:space-x-4">
+          <div className="hidden sm:flex items-center space-x-3 sm:space-x-4">
+            <UserActionIcon />
+            <Link href="/messages" className="flex flex-col items-center text-xs text-foreground/80 hover:text-primary">
+              <MessageSquare className="h-5 w-5 mb-0.5" />
               <span>Message</span>
             </Link>
-            <Link href="/orders" className="hidden sm:flex flex-col items-center text-xs">
-              <Heart className="h-5 w-5 mb-1" />
+            <Link href="/profile/orders" className="flex flex-col items-center text-xs text-foreground/80 hover:text-primary">
+              <Heart className="h-5 w-5 mb-0.5" /> {/* Using Heart for Orders as per original user's design */}
               <span>Orders</span>
             </Link>
-            <CartIcon />
-            <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              <Menu className="h-6 w-6" />
-            </Button>
           </div>
+          <CartActionIcon />
+          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            <Menu className="h-6 w-6" />
+            <span className="sr-only">Toggle menu</span>
+          </Button>
         </div>
+      </div>
+    </div>
+  );
+  
+  // Category Navigation (Secondary Navigation Bar from description)
+  const CategoryNav = () => (
+    <nav className="hidden md:block border-t bg-card">
+      <div className="container mx-auto px-4 py-2 flex items-center space-x-6">
+        <Button variant="ghost" size="sm" className="text-sm font-medium p-1 h-auto" onClick={() => setIsMobileMenuOpen(true)}>
+          <Menu className="h-4 w-4 mr-2" />
+          All category
+        </Button>
+        {mainCategories.slice(1).map((category) => ( // Slice to skip "All category" handled by button
+          <Link
+            key={category.name}
+            href={category.href}
+            className={cn(
+              "text-sm font-medium transition-colors hover:text-primary",
+              pathname === category.href || (category.href !== "/products" && pathname.startsWith(category.href))
+                ? "text-primary"
+                : "text-muted-foreground"
+            )}
+          >
+            {category.name}
+          </Link>
+        ))}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm" className="text-sm font-medium text-muted-foreground hover:text-primary p-1 h-auto">
+              Help <ChevronDown className="ml-1 h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start">
+            <DropdownMenuItem asChild><Link href="/help/faq">FAQ</Link></DropdownMenuItem>
+            <DropdownMenuItem asChild><Link href="/help/contact">Contact Us</Link></DropdownMenuItem>
+            <DropdownMenuItem asChild><Link href="/help/shipping">Shipping Info</Link></DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </nav>
+  );
 
-        <nav className="hidden md:flex items-center space-x-6 mt-2">
-          {categories.map((category) =>
-            category.hasDropdown ? (
-              <DropdownMenu key={category.name}>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="text-sm font-medium">
-                    {category.name} <ChevronDown className="ml-1 h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
-                    <Link href="/help/faq">FAQ</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/help/contact">Contact Us</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/help/shipping">Shipping Info</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <Link
-                key={category.name}
-                href={category.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
-                  pathname === category.href ? "text-primary" : "text-muted-foreground",
-                )}
-              >
-                {category.name}
-              </Link>
-            ),
+  // Mobile Menu
+  const MobileMenu = () => (
+    isMobileMenuOpen && (
+      <div className="md:hidden border-t bg-background absolute w-full shadow-lg p-4 space-y-3 z-40">
+        <form onSubmit={handleSearchSubmit} className="flex items-center mb-3">
+          <Input
+            type="search"
+            placeholder="Search products..."
+            className="flex-1"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <Button type="submit" className="ml-2">
+            <Search className="h-4 w-4" />
+          </Button>
+        </form>
+        <nav className="grid gap-2">
+          {mainCategories.map((category) => (
+            <Link
+              key={category.name}
+              href={category.href}
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary p-2 rounded-md",
+                pathname === category.href ? "bg-muted text-primary" : "text-muted-foreground"
+              )}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {category.name}
+            </Link>
+          ))}
+          <Link href="/help/faq" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Help</Link>
+          <DropdownMenuSeparator />
+           {user ? (
+            <>
+              <Link href="/profile" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Profile</Link>
+              <Link href="/profile/orders" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Orders</Link>
+              <Link href="/messages" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Messages</Link>
+              <Link href="/admin" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Admin Panel</Link>
+              <button onClick={() => { handleSignOut(); setIsMobileMenuOpen(false);}} className="text-left text-sm font-medium transition-colors text-destructive hover:bg-destructive/10 p-2 rounded-md">Logout</button>
+            </>
+          ) : (
+            <Link href="/login" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Login / Sign Up</Link>
           )}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="text-sm font-medium">
-                Help <ChevronDown className="ml-1 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>FAQ</DropdownMenuItem>
-              <DropdownMenuItem>Contact Us</DropdownMenuItem>
-              <DropdownMenuItem>Shipping Info</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <div className="flex-1" />
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="text-sm font-medium">
-                English, USD <ChevronDown className="ml-1 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>English, USD</DropdownMenuItem>
-              <DropdownMenuItem>Spanish, EUR</DropdownMenuItem>
-              <DropdownMenuItem>French, EUR</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="text-sm font-medium">
-                Ship to 🇩🇪 <ChevronDown className="ml-1 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>Germany 🇩🇪</DropdownMenuItem>
-              <DropdownMenuItem>United States 🇺🇸</DropdownMenuItem>
-              <DropdownMenuItem>United Kingdom 🇬🇧</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
         </nav>
       </div>
+    )
+  );
 
-      {isMenuOpen && (
-        <div className="md:hidden border-t p-4">
-          <div className="flex items-center mb-4">
-            <Input type="search" placeholder="Search" className="flex-1" />
-            <Button className="ml-2">Search</Button>
-          </div>
-          <nav className="grid gap-2">
-            {categories.map((category) => (
-              <Link
-                key={category.name}
-                href={category.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary p-2 rounded-md",
-                  pathname === category.href ? "bg-muted text-primary" : "text-muted-foreground",
-                )}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {category.name}
-              </Link>
-            ))}
-            <Link
-              href="/help"
-              className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Help
-            </Link>
-          </nav>
-        </div>
-      )}
+  return (
+    <header className="sticky top-0 z-50 bg-background shadow-sm border-b">
+      <TopBar />
+      <MainNav />
+      <CategoryNav />
+      <MobileMenu />
     </header>
-  )
-}
+  );
+};
+
+export default Header;

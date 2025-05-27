@@ -12,9 +12,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Separator } from "@/components/ui/separator"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { useAuth } from "@/hooks/useAuth";
-import { getCartItems, clearCart } from "@/lib/service/cart"
+import { useAuth } from "@/hooks/useAuth"
+import { getCartItems, clearCart } from "@/lib/service/cart" // We will keep clearCart
 import { createOrder } from "@/lib/service/orders"
+import { useCart } from "@/contexts/CartContext"; // Added useCart import
 
 interface CartItem {
   id: string
@@ -29,7 +30,7 @@ interface CartItem {
 }
 
 export default function CheckoutPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const { cartItems } = useCart(); // Get cartItems from context
   const [loading, setLoading] = useState(true)
   const [processing, setProcessing] = useState(false)
   const [orderComplete, setOrderComplete] = useState(false)
@@ -58,20 +59,10 @@ export default function CheckoutPage() {
   })
 
   useEffect(() => {
-    const fetchCartItems = async () => {
-      if (user) {
-        try {
-          const items = await getCartItems()
-          setCartItems(items)
-        } catch (error) {
-          console.error("Error fetching cart items:", error)
-        }
-      }
-      setLoading(false)
-    }
+    // Set loading to false initially, as cart items are now fetched by the context
+    setLoading(false);
+  }, []);
 
-    fetchCartItems()
-  }, [user])
 
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
   const shippingCost = shippingMethod === "express" ? 15.99 : shippingMethod === "standard" ? 5.99 : 0
@@ -182,6 +173,7 @@ export default function CheckoutPage() {
       </div>
     )
   }
+
 
   if (cartItems.length === 0) {
     return (

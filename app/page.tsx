@@ -11,10 +11,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Desktop Header */}
-      <div className="hidden md:block">
-        <Header />
-      </div>
+      <Header />
 
       <main className="flex-1">
         {/* Hero Section - Desktop */}

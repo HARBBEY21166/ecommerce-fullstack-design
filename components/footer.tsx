@@ -1,9 +1,9 @@
 import Link from "next/link"
-import { Facebook, Twitter, Linkedin, Instagram, Youtube } from "lucide-react"
+//import { Facebook, Twitter, Linkedin, Instagram, Youtube } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 pt-10 pb-4">
+     <footer className="bg-gray-100 pt-10 pb-4">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
@@ -18,7 +18,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-2">
               <Link href="#" className="p-2 bg-gray-200 rounded-full">
-                <Facebook className="h-4 w-4" />
+                <Facebook className="h-4 w-4 text-gray-600" />
               </Link>
               <Link href="#" className="p-2 bg-gray-200 rounded-full">
                 <Twitter className="h-4 w-4" />

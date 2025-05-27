@@ -185,7 +185,7 @@ const Header = () => {
               <MessageSquare className="h-5 w-5 mb-0.5" />
               <span>Message</span>
             </Link>
-            <Link href="/profile/orders" className="flex flex-col items-center text-xs text-foreground/80 hover:text-primary">
+            <Link href="/orders" className="flex flex-col items-center text-xs text-foreground/80 hover:text-primary">
               <Heart className="h-5 w-5 mb-0.5" /> {/* Using Heart for Orders as per original user's design */}
               <span>Orders</span>
             </Link>
@@ -273,7 +273,7 @@ const Header = () => {
            {user ? (
             <>
               <Link href="/profile" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Profile</Link>
-              <Link href="/profile/orders" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Orders</Link>
+              <Link href="/orders" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Orders</Link>
               <Link href="/messages" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Messages</Link>
               <Link href="/admin" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Admin Panel</Link>
               <button onClick={() => { handleSignOut(); setIsMobileMenuOpen(false);}} className="text-left text-sm font-medium transition-colors text-destructive hover:bg-destructive/10 p-2 rounded-md">Logout</button>

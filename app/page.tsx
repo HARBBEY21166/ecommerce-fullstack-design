@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function Home() {
   const user = null // Replace with actual authentication logic
@@ -447,6 +448,78 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Services Section */}
+      <section className="mb-8">
+        <Card>
+          <CardContent className="p-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-6">Our extra services</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { title: "Source from Industry Hubs", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" },
+                { title: "Customize Your Products", image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" },
+                { title: "Fast, reliable shipping", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" },
+                { title: "Product monitoring", image: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" },
+              ].map((service, index) => (
+                <div key={index} className="relative rounded-lg overflow-hidden group cursor-pointer">
+                  <img src={service.image} alt={service.title} className="w-full h-32 object-cover" />
+                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <div className="text-center text-white">
+                      <h3 className="font-semibold text-sm">{service.title}</h3>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Suppliers by Region */}
+      <section className="mb-8">
+        <Card>
+          <CardContent className="p-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-6">Suppliers by region</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 text-sm">
+              {[
+                { country: "Arabic Emirates", flag: "ae" },
+                { country: "Australia", flag: "au" },
+                { country: "United States", flag: "us" },
+                { country: "Russia", flag: "ru" },
+                { country: "Italy", flag: "it" },
+                { country: "Denmark", flag: "dk" },
+                { country: "France", flag: "fr" },
+                { country: "Germany", flag: "de" },
+              ].map((supplier, index) => (
+                <div key={index} className="flex items-center">
+                  <img src={`https://flagcdn.com/w20/${supplier.flag}.png`} alt={supplier.country} className="w-5 h-3 mr-2" />
+                  <span>{supplier.country}</span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Newsletter */}
+      <section className="mb-8">
+        <Card>
+          <CardContent className="p-6 text-center">
+            <h2 className="text-xl font-bold text-gray-900 mb-2">Subscribe on our newsletter</h2>
+            <p className="text-gray-600 mb-6">Get daily news on upcoming offers from many suppliers all over the world</p>
+            <div className="flex max-w-md mx-auto">
+              <Input 
+                type="email" 
+                placeholder="Email" 
+                className="flex-1 rounded-r-none"
+              />
+              <Button className="bg-blue-600 hover:bg-blue-700 rounded-l-none">
+                Subscribe
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
       </main>
       <Footer />
     </div>

@@ -3,19 +3,19 @@
 import { useState } from "react"
 import { ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useAuth } from "@/hooks/useAuth";
-import { addToCart } from "@/lib/service/cart"
+import { useAuth } from "@/hooks/useAuth"
 import { cn } from "@/lib/utils"
-
-interface Product {
-  id: string
-  name: string
-  price: number
-  image: string
-}
+import { useCart } from "@/contexts/CartContext"
+import { useRouter } from "next/navigation"
 
 interface AddToCartButtonProps {
-  product: Product
+  product: {
+    id: string
+    name: string
+    price: number
+    image: string
+    stock?: number
+  }
   className?: string
 }
 
@@ -23,23 +23,20 @@ export default function AddToCartButton({ product, className }: AddToCartButtonP
   const [loading, setLoading] = useState(false)
   const [added, setAdded] = useState(false)
   const { user } = useAuth()
+  const { addToCart } = useCart()
+  const router = useRouter()
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = () => {
     if (!user) {
-      // Redirect to login if not authenticated
-      window.location.href = "/auth/login"
+      router.push(`/auth/login?redirect=/products/${product.id}`)
       return
     }
 
     setLoading(true)
     try {
-      await addToCart(product.id)
+      addToCart(product, 1)
       setAdded(true)
-
-      // Dispatch custom event to update cart count
-      window.dispatchEvent(new CustomEvent("cartUpdated"))
-
-      setTimeout(() => setAdded(false), 2000) // Reset after 2 seconds
+      setTimeout(() => setAdded(false), 2000)
     } catch (error) {
       console.error("Error adding to cart:", error)
     } finally {
@@ -50,8 +47,12 @@ export default function AddToCartButton({ product, className }: AddToCartButtonP
   return (
     <Button
       onClick={handleAddToCart}
-      disabled={loading}
-      className={cn("transition-all duration-200", added && "bg-green-500 hover:bg-green-600", className)}
+      disabled={loading || added}
+      className={cn(
+        "transition-all duration-200",
+        added && "bg-green-500 hover:bg-green-600",
+        className
+      )}
     >
       <ShoppingCart className="h-4 w-4 mr-2" />
       {loading ? "Adding..." : added ? "Added!" : "Add to Cart"}

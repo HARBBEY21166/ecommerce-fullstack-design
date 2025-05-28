@@ -11,7 +11,7 @@ export default function Home() {
   const user = null // Replace with actual authentication logic
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <><div className="min-h-screen flex flex-col">
       <Header />
 
       <main className="flex-1">
@@ -83,8 +83,7 @@ export default function Home() {
                   alt="Electronics"
                   width={150}
                   height={150}
-                  className="rounded-md"
-                />
+                  className="rounded-md" />
               </div>
             </div>
 
@@ -142,8 +141,7 @@ export default function Home() {
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mobile-main.jpg-BXSA5enHTeQXVCOL1nyX6dLTFHCaKa.jpeg"
                 alt="Electronics"
                 fill
-                className="object-cover object-right"
-              />
+                className="object-cover object-right" />
             </div>
           </div>
         </section>
@@ -182,8 +180,7 @@ export default function Home() {
                   alt="Smart watches"
                   width={100}
                   height={100}
-                  className="mx-auto mb-2"
-                />
+                  className="mx-auto mb-2" />
                 <h3 className="text-sm font-medium">Smart watches</h3>
                 <p className="text-xs text-red-500 mt-1">-25%</p>
               </Link>
@@ -196,8 +193,7 @@ export default function Home() {
                   alt="Laptops"
                   width={100}
                   height={100}
-                  className="mx-auto mb-2"
-                />
+                  className="mx-auto mb-2" />
                 <h3 className="text-sm font-medium">Laptops</h3>
                 <p className="text-xs text-red-500 mt-1">-15%</p>
               </Link>
@@ -210,8 +206,7 @@ export default function Home() {
                   alt="GoPro cameras"
                   width={100}
                   height={100}
-                  className="mx-auto mb-2"
-                />
+                  className="mx-auto mb-2" />
                 <h3 className="text-sm font-medium">GoPro cameras</h3>
                 <p className="text-xs text-red-500 mt-1">-40%</p>
               </Link>
@@ -224,8 +219,7 @@ export default function Home() {
                   alt="Headphones"
                   width={100}
                   height={100}
-                  className="mx-auto mb-2"
-                />
+                  className="mx-auto mb-2" />
                 <h3 className="text-sm font-medium">Headphones</h3>
                 <p className="text-xs text-red-500 mt-1">-25%</p>
               </Link>
@@ -238,8 +232,7 @@ export default function Home() {
                   alt="Canon cameras"
                   width={100}
                   height={100}
-                  className="mx-auto mb-2"
-                />
+                  className="mx-auto mb-2" />
                 <h3 className="text-sm font-medium">Canon cameras</h3>
                 <p className="text-xs text-red-500 mt-1">-25%</p>
               </Link>
@@ -270,8 +263,7 @@ export default function Home() {
                   alt="Home and outdoor"
                   width={150}
                   height={150}
-                  className="ml-auto"
-                />
+                  className="ml-auto" />
               </div>
 
               {[
@@ -298,8 +290,7 @@ export default function Home() {
                     alt="Product"
                     width={60}
                     height={60}
-                    className="md:ml-auto"
-                  />
+                    className="md:ml-auto" />
                 </Link>
               ))}
             </div>
@@ -329,8 +320,7 @@ export default function Home() {
                   alt="Electronics"
                   width={150}
                   height={150}
-                  className="ml-auto"
-                />
+                  className="ml-auto" />
               </div>
 
               {[
@@ -357,8 +347,7 @@ export default function Home() {
                     alt="Product"
                     width={60}
                     height={60}
-                    className="md:ml-auto"
-                  />
+                    className="md:ml-auto" />
                 </Link>
               ))}
             </div>
@@ -422,25 +411,22 @@ export default function Home() {
                     alt="Product"
                     width={120}
                     height={120}
-                    className="w-full h-24 md:h-32 object-cover"
-                  />
+                    className="w-full h-24 md:h-32 object-cover" />
                   <div className="p-2 md:p-3">
                     <p className="font-semibold text-sm md:text-base">${(Math.random() * 100).toFixed(2)}</p>
                     <p className="text-xs text-gray-600 mt-1 line-clamp-2">
-                      {
-                        [
-                          "T-shirts with multiple colors, for men",
-                          "Jeans shorts for men blue color",
-                          "Brown winter coat medium size",
-                          "Jeans bag for travel for men",
-                          "Leather wallet",
-                          "Canon camera black, 100x zoom",
-                          "Headset for gaming with mic",
-                          "Smartwatch silver color modern",
-                          "Blue wallet for men leather material",
-                          "Jeans bag for travel for men",
-                        ][i]
-                      }
+                      {[
+                        "T-shirts with multiple colors, for men",
+                        "Jeans shorts for men blue color",
+                        "Brown winter coat medium size",
+                        "Jeans bag for travel for men",
+                        "Leather wallet",
+                        "Canon camera black, 100x zoom",
+                        "Headset for gaming with mic",
+                        "Smartwatch silver color modern",
+                        "Blue wallet for men leather material",
+                        "Jeans bag for travel for men",
+                      ][i]}
                     </p>
                   </div>
                 </Link>
@@ -449,79 +435,75 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Services Section */}
-      <section className="mb-8">
-        <Card>
-          <CardContent className="p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Our extra services</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {/* Our extra services */}
+        <section className="py-8">
+          <div className="container mx-auto px-4">
+            <h2 className="text-xl font-semibold mb-4">Our extra services</h2>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               {[
-                { title: "Source from Industry Hubs", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" },
-                { title: "Customize Your Products", image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" },
-                { title: "Fast, reliable shipping", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" },
-                { title: "Product monitoring", image: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" },
-              ].map((service, index) => (
-                <div key={index} className="relative rounded-lg overflow-hidden group cursor-pointer">
-                  <img src={service.image} alt={service.title} className="w-full h-32 object-cover" />
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <h3 className="font-semibold text-sm">{service.title}</h3>
+                { title: "Source from Industry Hubs", image: "/placeholder.svg?height=150&width=150" },
+                { title: "Customize Your Products", image: "/placeholder.svg?height=150&width=150" },
+                { title: "Fast, reliable shipping", image: "/placeholder.svg?height=150&width=150" },
+                { title: "Product monitoring", image: "/placeholder.svg?height=150&width=150" },
+              ].map((service, i) => (
+                <Card key={i} className="relative">
+                  <CardContent className="p-0">
+                    <Image src={service.image} alt={service.title} width={150} height={150} className="w-full h-32 object-cover rounded-t-md" />
+                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-t-md">
+                      <p className="text-white text-sm font-semibold text-center px-2">{service.title}</p>
                     </div>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
-          </CardContent>
-        </Card>
-      </section>
+          </div>
+        </section>
 
-      {/* Suppliers by Region */}
-      <section className="mb-8">
-        <Card>
-          <CardContent className="p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Suppliers by region</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 text-sm">
+        {/* Suppliers by region */}
+        <section className="py-8">
+          <div className="container mx-auto px-4">
+            <h2 className="text-xl font-semibold mb-4">Suppliers by region</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {[
-                { country: "Arabic Emirates", flag: "ae" },
+                { region: "Arabic Emirates", flag: "ae" },
                 { country: "Australia", flag: "au" },
                 { country: "United States", flag: "us" },
                 { country: "Russia", flag: "ru" },
                 { country: "Italy", flag: "it" },
                 { country: "Denmark", flag: "dk" },
                 { country: "France", flag: "fr" },
-                { country: "Germany", flag: "de" },
-              ].map((supplier, index) => (
-                <div key={index} className="flex items-center">
-                  <img src={`https://flagcdn.com/w20/${supplier.flag}.png`} alt={supplier.country} className="w-5 h-3 mr-2" />
-                  <span>{supplier.country}</span>
+                { region: "Germany", flag: "de" },
+                { region: "China", flag: "cn" },
+                { region: "Great Britain", flag: "gb" },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center space-x-2 text-sm">
+<Image src={`https://flagcdn.com/w40/${item.flag}.png`} alt={item.region ?? 'Unknown region'} width={20} height={15} />
+                  <span>{item.region}</span>
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
-      </section>
+          </div>
+        </section>
 
-      {/* Newsletter */}
-      <section className="mb-8">
-        <Card>
-          <CardContent className="p-6 text-center">
-            <h2 className="text-xl font-bold text-gray-900 mb-2">Subscribe on our newsletter</h2>
+        {/* Subscribe to newsletter */}
+        <section className="py-8 bg-gray-100">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-xl font-semibold mb-2">Subscribe to our newsletter</h2>
             <p className="text-gray-600 mb-6">Get daily news on upcoming offers from many suppliers all over the world</p>
             <div className="flex max-w-md mx-auto">
-              <Input 
-                type="email" 
-                placeholder="Email" 
-                className="flex-1 rounded-r-none"
-              />
+              <Input
+                type="email"
+                placeholder="Email"
+                className="flex-1 rounded-r-none" />
               <Button className="bg-blue-600 hover:bg-blue-700 rounded-l-none">
                 Subscribe
               </Button>
             </div>
-          </CardContent>
-        </Card>
-      </section>
-      </main>
-      <Footer />
-    </div>
+            </div>
+            </section>
+            </main>
+       <Footer />
+      </div>
+      </> 
   )
 }

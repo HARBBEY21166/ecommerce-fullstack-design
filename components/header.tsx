@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from "react";
@@ -9,6 +8,9 @@ import { useAuth } from "@/hooks/useAuth";
 import { auth as firebaseAuth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 import { cn } from "@/lib/utils";
+import { SidebarNavigation } from '@/components/ui/sidebar';
+import { useIsMobile } from '@/hooks/use-mobile';
+
 import {
   Search,
   ShoppingCart,
@@ -35,7 +37,6 @@ const Header = () => {
   const router = useRouter();
   const { itemCount } = useCart();
   const { user } = useAuth();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   const mainCategories = [
@@ -50,7 +51,7 @@ const Header = () => {
     e.preventDefault();
     if (searchQuery.trim()) {
       router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
-      setIsMobileMenuOpen(false);
+      ;
     }
   };
 
@@ -99,7 +100,7 @@ const Header = () => {
       );
     }
     return (
-      <Link href="/auth/login" className="flex flex-col items-center text-xs text-foreground/80 hover:text-primary">
+      <Link href="/login" className="flex flex-col items-center text-xs text-foreground/80 hover:text-primary">
         <User className="h-5 w-5 mb-0.5" />
         <span>Login</span>
       </Link>
@@ -138,7 +139,10 @@ const Header = () => {
   );
 
   // Main Navigation: Logo, SearchBar, UserActions (Section 1 from description)
-  const MainNav = () => (
+  const MainNav = () => {
+    const isMobile = useIsMobile();
+
+      return(
     <div className="container mx-auto px-4 py-3">
       <div className="flex items-center justify-between">
         <Link href="/" className="flex items-center">
@@ -190,21 +194,19 @@ const Header = () => {
               <span>Orders</span>
             </Link>
           </div>
+          {isMobile && <SidebarNavigation />} 
           <CartActionIcon />
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            <Menu className="h-6 w-6" />
-            <span className="sr-only">Toggle menu</span>
-          </Button>
         </div>
       </div>
     </div>
   );
+};
   
   // Category Navigation (Secondary Navigation Bar from description)
   const CategoryNav = () => (
     <nav className="hidden md:block border-t bg-card">
       <div className="container mx-auto px-4 py-2 flex items-center space-x-6">
-        <Button variant="ghost" size="sm" className="text-sm font-medium p-1 h-auto" onClick={() => setIsMobileMenuOpen(true)}>
+        <Button variant="ghost" size="sm" className="text-sm font-medium p-1 h-auto">
           <Menu className="h-4 w-4 mr-2" />
           All category
         </Button>
@@ -238,60 +240,13 @@ const Header = () => {
     </nav>
   );
 
-  // Mobile Menu
-  const MobileMenu = () => (
-    isMobileMenuOpen && (
-      <div className="md:hidden border-t bg-background absolute w-full shadow-lg p-4 space-y-3 z-40">
-        <form onSubmit={handleSearchSubmit} className="flex items-center mb-3">
-          <Input
-            type="search"
-            placeholder="Search products..."
-            className="flex-1"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <Button type="submit" className="ml-2">
-            <Search className="h-4 w-4" />
-          </Button>
-        </form>
-        <nav className="grid gap-2">
-          {mainCategories.map((category) => (
-            <Link
-              key={category.name}
-              href={category.href}
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary p-2 rounded-md",
-                pathname === category.href ? "bg-muted text-primary" : "text-muted-foreground"
-              )}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {category.name}
-            </Link>
-          ))}
-          <Link href="/help/faq" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Help</Link>
-          <DropdownMenuSeparator />
-           {user ? (
-            <>
-              <Link href="/profile" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Profile</Link>
-              <Link href="/orders" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Orders</Link>
-              <Link href="/messages" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Messages</Link>
-              <Link href="/admin" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Admin Panel</Link>
-              <button onClick={() => { handleSignOut(); setIsMobileMenuOpen(false);}} className="text-left text-sm font-medium transition-colors text-destructive hover:bg-destructive/10 p-2 rounded-md">Logout</button>
-            </>
-          ) : (
-            <Link href="/login" className="text-sm font-medium transition-colors hover:text-primary p-2 rounded-md text-muted-foreground" onClick={() => setIsMobileMenuOpen(false)}>Login / Sign Up</Link>
-          )}
-        </nav>
-      </div>
-    )
-  );
+ 
 
   return (
     <header className="sticky top-0 z-50 bg-background shadow-sm border-b">
       <TopBar />
       <MainNav />
       <CategoryNav />
-      <MobileMenu />
     </header>
   );
 };

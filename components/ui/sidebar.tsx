@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import { Slot, Slottable } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
 import { PanelLeft } from "lucide-react"
 
@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
-import { Sheet, SheetContent } from "@/components/ui/sheet"
+//import { Sheet, SheetContent } from "@/components/ui/sheet"
 import { Skeleton } from "@/components/ui/skeleton"
 import {
   Tooltip,
@@ -18,6 +18,19 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./sheet"
+import { ChevronDown, Heart, Home, List, Menu, ShoppingCart, User } from "lucide-react"
+import Link from "next/link"
+import { useState } from "react"
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -734,6 +747,137 @@ const SidebarMenuSubButton = React.forwardRef<
   )
 })
 SidebarMenuSubButton.displayName = "SidebarMenuSubButton"
+
+export {
+  SidebarNavigation
+}
+
+interface MenuItemProps {
+  icon?: React.ElementType
+  label: string
+  href: string
+}
+
+const MenuItem: React.FC<MenuItemProps> = ({ icon: Icon, label, href }) => (
+  <Link href={href} className="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-200">
+    {Icon && <Icon className="w-5 h-5 text-gray-600" />}
+    <span className="text-sm font-medium text-gray-800">{label}</span>
+  </Link>
+)
+
+const SidebarNavigation: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen)
+  }
+
+  return (
+    <>
+      {/* Hamburger Menu Button */}
+      <Button variant="ghost" size="icon" onClick={toggleSidebar} className="md:hidden">
+        <Menu className="w-6 h-6" />
+        <span className="sr-only">Toggle sidebar</span>
+      </Button>
+
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black opacity-50 z-40 md:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`fixed inset-y-0 left-0 w-64 bg-white shadow-lg transform ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } transition-transform duration-300 ease-in-out z-50 md:relative md:translate-x-0 md:shadow-none md:bg-transparent`}
+      >
+        <div className="flex flex-col h-full p-4">
+          {/* Sign in / Register */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                <User className="w-5 h-5 text-gray-600" />
+              </div>
+              <span className="font-semibold text-gray-800">Sign in | Register</span>
+            </div>
+            {/* Close button for mobile */}
+            <Button variant="ghost" size="icon" onClick={toggleSidebar} className="md:hidden">
+              <Menu className="w-6 h-6 rotate-90" /> {/* Using Menu icon rotated for close */}
+              <span className="sr-only">Close sidebar</span>
+            </Button>
+          </div>
+
+          {/* Navigation Menu */}
+          <nav className="flex-1">
+            <ul className="space-y-2">
+              <li>
+                <MenuItem icon={Home} label="Home" href="/" />
+              </li>
+              <li>
+                <MenuItem icon={List} label="Categories" href="#" />
+              </li>
+              <li>
+                <MenuItem icon={Heart} label="Favorites" href="#" />
+              </li>
+              <li>
+                <MenuItem icon={ShoppingCart} label="My orders" href="/orders" />
+              </li>
+              <li>
+                {/* This item has text and an icon, but no separate route */}
+                <div className="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-200 cursor-pointer">
+                    <div className="flex items-center space-x-1">
+                        <span className="text-sm font-medium text-gray-800">English</span>
+                        <ChevronDown className="w-4 h-4 text-gray-600" />
+                    </div>
+                    <span className="text-sm font-medium text-gray-800">|</span>
+                     <div className="flex items-center space-x-1">
+                         <span className="text-sm font-medium text-gray-800">USD</span>
+                         <ChevronDown className="w-4 h-4 text-gray-600" />
+                     </div>
+                </div>
+              </li>
+              <li>
+                <MenuItem icon={List} label="Contact us" href="#" /> {/* Using List as placeholder icon */}
+              </li>
+              <li>
+                <MenuItem icon={List} label="About" href="#" /> {/* Using List as placeholder icon */}
+              </li>
+            </ul>
+          </nav>
+
+          {/* Additional Menu Items */}
+          <div className="mt-6 space-y-2 text-sm text-gray-600">
+            <Link href="#" className="block p-2 rounded-md hover:bg-gray-200">
+              User agreement
+            </Link>
+            <Link href="#" className="block p-2 rounded-md hover:bg-gray-200">
+              Partnership
+            </Link>
+            <Link href="#" className="block p-2 rounded-md hover:bg-gray-200">
+              Privacy policy
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+// Rest of your component exports...
+
+
+
+
+
+
+
+
+
+
+
 
 export {
   Sidebar,

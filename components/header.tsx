@@ -99,7 +99,7 @@ const Header = () => {
       );
     }
     return (
-      <Link href="/login" className="flex flex-col items-center text-xs text-foreground/80 hover:text-primary">
+      <Link href="/auth/login" className="flex flex-col items-center text-xs text-foreground/80 hover:text-primary">
         <User className="h-5 w-5 mb-0.5" />
         <span>Login</span>
       </Link>

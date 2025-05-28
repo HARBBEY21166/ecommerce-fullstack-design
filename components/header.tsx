@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
@@ -10,6 +11,7 @@ import { signOut } from "firebase/auth";
 import { cn } from "@/lib/utils";
 import { SidebarNavigation } from '@/components/ui/sidebar';
 import { useIsMobile } from '@/hooks/use-mobile';
+import logo from "@/public/logo.png"; // Adjust the path to your logo image
 
 import {
   Search,
@@ -107,37 +109,6 @@ const Header = () => {
     );
   };
 
-  // Top Bar (Secondary Nav from description: Language and Shipping)
-  const TopBar = () => (
-    <div className="bg-muted/50 py-1.5 text-xs text-muted-foreground hidden md:block">
-      <div className="container mx-auto px-4 flex justify-end items-center space-x-4">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-xs p-1 h-auto hover:bg-transparent hover:text-primary">
-              English, USD <ChevronDown className="ml-1 h-3 w-3" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>English, USD</DropdownMenuItem>
-            <DropdownMenuItem>Español, EUR</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-xs p-1 h-auto hover:bg-transparent hover:text-primary">
-              Ship to <span className="mx-1">🇩🇪</span> {/* Placeholder flag */}
-              <ChevronDown className="ml-1 h-3 w-3" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>Germany 🇩🇪</DropdownMenuItem>
-            <DropdownMenuItem>United States 🇺🇸</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    </div>
-  );
-
   // Main Navigation: Logo, SearchBar, UserActions (Section 1 from description)
   const MainNav = () => {
     const isMobile = useIsMobile();
@@ -148,7 +119,8 @@ const Header = () => {
         <Link href="/" className="flex items-center">
           <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
             {/* Blue brand logo with "B" */}
-            <span className="text-xl font-bold">B</span>
+            {/*<span className="text-xl font-bold">B</span>*/}
+            <Image src={logo} alt="Logo" />
           </div>
           <span className="ml-2 text-xl font-semibold text-primary">Brand</span> {/* Brand name */}
         </Link>
@@ -156,9 +128,16 @@ const Header = () => {
         {/* Desktop Search Bar */}
         <div className="hidden md:flex items-center flex-1 max-w-xl mx-4">
           <form onSubmit={handleSearchSubmit} className="relative w-full flex">
+            <Input
+              type="search"
+              placeholder="Search"
+              className="rounded-r-none border-r-0 focus:border-primary focus:ring-primary"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="rounded-r-none border-r-0 px-3 hover:bg-accent">
+                <Button variant="outline" className="rounded-none px-3 hover:bg-accent">
                   All category <ChevronDown className="ml-1 h-4 w-4 opacity-70" />
                 </Button>
               </DropdownMenuTrigger>
@@ -167,13 +146,6 @@ const Header = () => {
                 <DropdownMenuItem onSelect={() => console.log("Category: Apparel")}>Apparel</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Input
-              type="search"
-              placeholder="Search"
-              className="rounded-none focus:border-primary focus:ring-primary"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
             <Button type="submit" className="rounded-l-none bg-primary hover:bg-primary/90">
               <Search className="h-4 w-4 md:mr-2" />
               <span className="hidden md:inline">Search</span>
@@ -205,46 +177,71 @@ const Header = () => {
   // Category Navigation (Secondary Navigation Bar from description)
   const CategoryNav = () => (
     <nav className="hidden md:block border-t bg-card">
-      <div className="container mx-auto px-4 py-2 flex items-center space-x-6">
-        <Button variant="ghost" size="sm" className="text-sm font-medium p-1 h-auto">
-          <Menu className="h-4 w-4 mr-2" />
-          All category
+     <div className="container mx-auto px-4 py-2 flex items-center justify-between"> {/* Added justify-between here */}
+  <div className="flex items-center space-x-6"> {/* Wrap the left-aligned items in a div */}
+    <Button variant="ghost" size="sm" className="text-sm font-medium p-1 h-auto">
+      <Menu className="h-4 w-4 mr-2" />
+      All category
+    </Button>
+    {mainCategories.slice(1).map((category) => ( // Slice to skip "All category" handled by button
+    <Link
+      key={category.name}
+      href={category.href}
+      className={cn(
+      "text-sm font-medium transition-colors hover:text-primary",
+      pathname === category.href || (category.href !== "/products" && pathname.startsWith(category.href))
+      ? "text-primary"
+      : "text-muted-foreground"
+      )}
+      >
+      {category.name}
+    </Link>
+    ))}
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="text-sm font-medium text-muted-foreground hover:text-primary p-1 h-auto">
+          Help <ChevronDown className="ml-1 h-4 w-4" />
         </Button>
-        {mainCategories.slice(1).map((category) => ( // Slice to skip "All category" handled by button
-          <Link
-            key={category.name}
-            href={category.href}
-            className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
-              pathname === category.href || (category.href !== "/products" && pathname.startsWith(category.href))
-                ? "text-primary"
-                : "text-muted-foreground"
-            )}
-          >
-            {category.name}
-          </Link>
-        ))}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-sm font-medium text-muted-foreground hover:text-primary p-1 h-auto">
-              Help <ChevronDown className="ml-1 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start">
-            <DropdownMenuItem asChild><Link href="/help/faq">FAQ</Link></DropdownMenuItem>
-            <DropdownMenuItem asChild><Link href="/help/contact">Contact Us</Link></DropdownMenuItem>
-            <DropdownMenuItem asChild><Link href="/help/shipping">Shipping Info</Link></DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start">
+        <DropdownMenuItem asChild><Link href="/help/faq">FAQ</Link></DropdownMenuItem>
+        <DropdownMenuItem asChild><Link href="/help/contact">Contact Us</Link></DropdownMenuItem>
+        <DropdownMenuItem asChild><Link href="/help/shipping">Shipping Info</Link></DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  </div>
+
+  <div className="flex items-center space-x-4"> {/* Removed mx-auto and justify-end here */}
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="text-xs p-1 h-auto hover:bg-transparent hover:text-primary">
+          English, USD <ChevronDown className="ml-1 h-3 w-3" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem>English, USD</DropdownMenuItem>
+        <DropdownMenuItem>Español, EUR</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="text-xs p-1 h-auto hover:bg-transparent hover:text-primary">
+          Ship to <span className="mx-1">🇩🇪</span> {/* Placeholder flag */}
+          <ChevronDown className="ml-1 h-3 w-3" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem>Germany 🇩🇪</DropdownMenuItem>
+        <DropdownMenuItem>United States 🇺🇸</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  </div>
+</div>      
     </nav>
   );
 
- 
-
   return (
     <header className="sticky top-0 z-50 bg-background shadow-sm border-b">
-      <TopBar />
       <MainNav />
       <CategoryNav />
     </header>

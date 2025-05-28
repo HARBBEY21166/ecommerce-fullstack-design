@@ -79,7 +79,7 @@ export default function Home() {
               </div>
               <div className="ml-auto">
                 <Image
-                  src="/placeholder.svg?height=150&width=150"
+                  src="https://i.pinimg.com/736x/67/2a/2e/672a2eca2b68c1ab9d960e8a864e3e17.jpg"
                   alt="Electronics"
                   width={150}
                   height={150}
@@ -176,7 +176,7 @@ export default function Home() {
                 className="bg-white p-4 rounded-md text-center hover:shadow-md transition-shadow"
               >
                 <Image
-                  src="/placeholder.svg?height=100&width=100"
+                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
                   alt="Smart watches"
                   width={100}
                   height={100}
@@ -189,7 +189,7 @@ export default function Home() {
                 className="bg-white p-4 rounded-md text-center hover:shadow-md transition-shadow"
               >
                 <Image
-                  src="/placeholder.svg?height=100&width=100"
+                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
                   alt="Laptops"
                   width={100}
                   height={100}
@@ -202,7 +202,7 @@ export default function Home() {
                 className="bg-white p-4 rounded-md text-center hover:shadow-md transition-shadow"
               >
                 <Image
-                  src="/placeholder.svg?height=100&width=100"
+                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
                   alt="GoPro cameras"
                   width={100}
                   height={100}
@@ -215,7 +215,7 @@ export default function Home() {
                 className="bg-white p-4 rounded-md text-center hover:shadow-md transition-shadow"
               >
                 <Image
-                  src="/placeholder.svg?height=100&width=100"
+                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
                   alt="Headphones"
                   width={100}
                   height={100}
@@ -228,7 +228,7 @@ export default function Home() {
                 className="bg-white p-4 rounded-md text-center hover:shadow-md transition-shadow"
               >
                 <Image
-                  src="/placeholder.svg?height=100&width=100"
+                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
                   alt="Canon cameras"
                   width={100}
                   height={100}
@@ -259,7 +259,7 @@ export default function Home() {
                   </Button>
                 </div>
                 <Image
-                  src="/placeholder.svg?height=150&width=150"
+                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
                   alt="Home and outdoor"
                   width={150}
                   height={150}
@@ -286,7 +286,7 @@ export default function Home() {
                     <p className="text-xs text-gray-500 text-center md:text-left">{item.price}</p>
                   </div>
                   <Image
-                    src="/placeholder.svg?height=60&width=60"
+                    src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
                     alt="Product"
                     width={60}
                     height={60}
@@ -316,7 +316,7 @@ export default function Home() {
                   </Button>
                 </div>
                 <Image
-                  src="/placeholder.svg?height=150&width=150"
+                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
                   alt="Electronics"
                   width={150}
                   height={150}
@@ -343,7 +343,7 @@ export default function Home() {
                     <p className="text-xs text-gray-500 text-center md:text-left">{item.price}</p>
                   </div>
                   <Image
-                    src="/placeholder.svg?height=60&width=60"
+                    src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
                     alt="Product"
                     width={60}
                     height={60}
@@ -407,7 +407,7 @@ export default function Home() {
                   className="bg-white border rounded-md overflow-hidden hover:shadow-md transition-shadow"
                 >
                   <Image
-                    src="/placeholder.svg?height=120&width=120"
+                    src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
                     alt="Product"
                     width={120}
                     height={120}
@@ -441,10 +441,10 @@ export default function Home() {
             <h2 className="text-xl font-semibold mb-4">Our extra services</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               {[
-                { title: "Source from Industry Hubs", image: "/placeholder.svg?height=150&width=150" },
-                { title: "Customize Your Products", image: "/placeholder.svg?height=150&width=150" },
-                { title: "Fast, reliable shipping", image: "/placeholder.svg?height=150&width=150" },
-                { title: "Product monitoring", image: "/placeholder.svg?height=150&width=150" },
+                { title: "Source from Industry Hubs", image: "https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg" },
+                { title: "Customize Your Products", image: "https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg" },
+                { title: "Fast, reliable shipping", image: "https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg" },
+                { title: "Product monitoring", image: "https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg" },
               ].map((service, i) => (
                 <Card key={i} className="relative">
                   <CardContent className="p-0">
@@ -466,12 +466,12 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {[
                 { region: "Arabic Emirates", flag: "ae" },
-                { country: "Australia", flag: "au" },
-                { country: "United States", flag: "us" },
-                { country: "Russia", flag: "ru" },
-                { country: "Italy", flag: "it" },
-                { country: "Denmark", flag: "dk" },
-                { country: "France", flag: "fr" },
+                { region: "Australia", flag: "au" },
+                { region: "United States", flag: "us" },
+                { region: "Russia", flag: "ru" },
+                { region: "Italy", flag: "it" },
+                { region: "Denmark", flag: "dk" },
+                { region: "France", flag: "fr" },
                 { region: "Germany", flag: "de" },
                 { region: "China", flag: "cn" },
                 { region: "Great Britain", flag: "gb" },

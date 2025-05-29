@@ -11,7 +11,7 @@ import { signOut } from "firebase/auth";
 import { cn } from "@/lib/utils";
 import { SidebarNavigation } from '@/components/ui/sidebar';
 import { useIsMobile } from '@/hooks/use-mobile';
-import logo from "@/public/logo.png"; // Adjust the path to your logo image
+import logo from '@/public/box-64.png';
 
 import {
   Search,

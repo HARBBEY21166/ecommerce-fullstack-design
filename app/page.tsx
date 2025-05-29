@@ -189,7 +189,7 @@ export default function Home() {
                 className="bg-white p-4 rounded-md text-center hover:shadow-md transition-shadow"
               >
                 <Image
-                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
+                  src="https://i.pinimg.com/736x/78/bf/a8/78bfa893270a0b531705b1c56f25674d.jpg"
                   alt="Laptops"
                   width={100}
                   height={100}
@@ -202,7 +202,7 @@ export default function Home() {
                 className="bg-white p-4 rounded-md text-center hover:shadow-md transition-shadow"
               >
                 <Image
-                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
+                  src="https://i.pinimg.com/736x/4a/1d/d8/4a1dd8bd0b0e3b0eb788d597d4c0df8f.jpg"
                   alt="GoPro cameras"
                   width={100}
                   height={100}
@@ -215,7 +215,7 @@ export default function Home() {
                 className="bg-white p-4 rounded-md text-center hover:shadow-md transition-shadow"
               >
                 <Image
-                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
+                  src="https://i.pinimg.com/736x/a8/33/7f/a8337f50ffaf22a9f4c350ed63362ec8.jpg"
                   alt="Headphones"
                   width={100}
                   height={100}
@@ -228,7 +228,7 @@ export default function Home() {
                 className="bg-white p-4 rounded-md text-center hover:shadow-md transition-shadow"
               >
                 <Image
-                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
+                  src="https://i.pinimg.com/736x/be/db/a6/bedba68744108caff81981ed77b95980.jpg"
                   alt="Canon cameras"
                   width={100}
                   height={100}
@@ -259,7 +259,7 @@ export default function Home() {
                   </Button>
                 </div>
                 <Image
-                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
+                  src="https://i.pinimg.com/736x/8b/e1/89/8be18946884dd101fafd77535f660eae.jpg"
                   alt="Home and outdoor"
                   width={150}
                   height={150}
@@ -267,14 +267,14 @@ export default function Home() {
               </div>
 
               {[
-                { name: "Soft chairs", category: "furniture", price: "From USD 19" },
-                { name: "Sofa & chair", category: "furniture", price: "From USD 19" },
-                { name: "Kitchen dishes", category: "home", price: "From USD 19" },
-                { name: "Smart watches", category: "wearables", price: "From USD 19" },
-                { name: "Kitchen mixer", category: "home-appliances", price: "From USD 19" },
-                { name: "Blenders", category: "home-appliances", price: "From USD 19" },
-                { name: "Home appliance", category: "home-appliances", price: "From USD 19" },
-                { name: "Coffee maker", category: "home-appliances", price: "From USD 19" },
+                { name: "Soft chairs", category: "furniture", price: "From USD 19", image: "https://i.pinimg.com/736x/6b/81/3f/6b813ff256e49639e8e85f254d296807.jpg" },
+                { name: "Sofa & chair", category: "furniture", price: "From USD 19", image: "https://i.pinimg.com/736x/85/94/c5/8594c50661226eb10bb58a63e38e8bdc.jpg" },
+                { name: "Kitchen dishes", category: "home", price: "From USD 19", image: "https://i.pinimg.com/736x/0a/41/c3/0a41c3d685bcbae32e073328fece819e.jpg" },
+                { name: "Bed", category: "furniture", price: "From USD 19", image: "https://i.pinimg.com/736x/00/3e/87/003e87ee12d3ed7a514129e49c2016a0.jpg" },
+                { name: "Kitchen mixer", category: "home-appliances", price: "From USD 19", image: "https://i.pinimg.com/736x/90/87/14/9087140ab8b2cbc3634124c033581afc.jpg" },
+                { name: "Blenders", category: "home-appliances", price: "From USD 19", image: "https://i.pinimg.com/736x/4f/61/06/4f6106c2ab041c1717d6a227ae530f6f.jpg" },
+                { name: "Home appliance", category: "home-appliances", price: "From USD 19", image: "https://i.pinimg.com/736x/9c/9c/9a/9c9c9af5b47d23db3ee71fbc32575dd3.jpg" },
+                { name: "Coffee maker", category: "home-appliances", price: "From USD 19", image: "https://i.pinimg.com/736x/cc/43/1a/cc431a026cb0a6e0119942fa5a85bc50.jpg" },
               ].map((item, i) => (
                 <Link
                   key={i}
@@ -286,7 +286,7 @@ export default function Home() {
                     <p className="text-xs text-gray-500 text-center md:text-left">{item.price}</p>
                   </div>
                   <Image
-                    src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
+                    src={item.image || "/placeholder.svg"}
                     alt="Product"
                     width={60}
                     height={60}
@@ -316,7 +316,7 @@ export default function Home() {
                   </Button>
                 </div>
                 <Image
-                  src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
+                  src="https://i.pinimg.com/736x/cf/ee/8b/cfee8bbab9dc4c479271d838e7d14553.jpg"
                   alt="Electronics"
                   width={150}
                   height={150}
@@ -324,14 +324,14 @@ export default function Home() {
               </div>
 
               {[
-                { name: "Smart watches", category: "wearables", price: "From USD 19" },
-                { name: "Cameras", category: "electronics", price: "From USD 19" },
-                { name: "Headphones", category: "audio", price: "From USD 19" },
-                { name: "Smart watches", category: "wearables", price: "From USD 19" },
-                { name: "Gaming set", category: "gaming", price: "From USD 19" },
-                { name: "Laptops & PC", category: "computers", price: "From USD 19" },
-                { name: "Smartphones", category: "smartphones", price: "From USD 19" },
-                { name: "Electric kettle", category: "home-appliances", price: "From USD 19" },
+                { name: "Smart watches", category: "wearables", price: "From USD 19", image:"https://i.pinimg.com/736x/20/29/d5/2029d51d3f51b028d6f0d4b7bab3c44d.jpg" },
+                { name: "Cameras", category: "electronics", price: "From USD 19", image:"https://i.pinimg.com/736x/bd/2a/a7/bd2aa7ec4c03e5e10f497278e4d999b1.jpg" },
+                { name: "Headphones", category: "audio", price: "From USD 19", image:"https://i.pinimg.com/736x/41/31/c0/4131c070168f5222a5601eae1014d1ee.jpg" },
+                { name: "Smart watches", category: "wearables", price: "From USD 19", image:"https://i.pinimg.com/736x/06/9d/87/069d878908ddacd172e0a8976e1fedac.jpg" },
+                { name: "Gaming set", category: "gaming", price: "From USD 19", image:"https://i.pinimg.com/736x/f8/0d/3e/f80d3ee7a40b55143afbd3e66a2161c8.jpg" },
+                { name: "Laptops & PC", category: "computers", price: "From USD 19", image:"https://i.pinimg.com/736x/c2/56/29/c2562961b1e81fc60e748f9f0f2f0769.jpg" },
+                { name: "Smartphones", category: "smartphones", price: "From USD 19", image:"https://i.pinimg.com/736x/d5/1b/0d/d51b0d8826063f245dc38e9ff6c5c263.jpg" },
+                { name: "Electric kettle", category: "home-appliances", price: "From USD 19", image:"https://i.pinimg.com/736x/e8/6e/e6/e86ee672ce5dc746ab148cd49ea8ff4a.jpg" },
               ].map((item, i) => (
                 <Link
                   key={i}
@@ -343,7 +343,7 @@ export default function Home() {
                     <p className="text-xs text-gray-500 text-center md:text-left">{item.price}</p>
                   </div>
                   <Image
-                    src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
+                    src={item.image || "/placeholder.svg"}
                     alt="Product"
                     width={60}
                     height={60}
@@ -401,35 +401,42 @@ export default function Home() {
 
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {Array.from({ length: 10 }).map((_, i) => (
-                <Link
-                  key={i}
-                  href={`/products/product-${i + 1}`}
+                <Link key={i}
+                  href={`/products/product-${i + 1}`} // Assuming product ID is based on index
                   className="bg-white border rounded-md overflow-hidden hover:shadow-md transition-shadow"
                 >
                   <Image
-                    src="https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg"
-                    alt="Product"
+                    src={[{ name: "T-shirts with multiple colors, for men", image: "https://i.pinimg.com/736x/b3/de/a9/b3dea9e22059f172581946b257836cdb.jpg" },
+                      { name: "Jeans shorts for men blue color", image: "https://i.pinimg.com/736x/fe/e1/2e/fee12e73032d8f37d099bf6a7eb1cbda.jpg" },
+                      { name: "Brown winter coat medium size", image: "https://i.pinimg.com/736x/a6/44/04/a644040311618669e5a197ff4f0f8112.jpg" },
+                      { name: "Jeans bag for travel for men", image: "https://i.pinimg.com/736x/99/1a/a6/991aa6d108eb39790164a5ba4c17a330.jpg" },
+                      { name: "Leather wallet", image: "https://i.pinimg.com/736x/2c/fa/2a/2cfa2aa485c6430ceeedf2a5935cf798.jpg" },
+                      { name: "Canon camera black, 100x zoom", image: "https://i.pinimg.com/736x/c0/fb/b1/c0fbb1bd5b5c6df0e87913927c987ea8.jpg" },
+                      { name: "Headset for gaming with mic", image: "https://i.pinimg.com/736x/07/48/e3/0748e35be71734a6564ae57f769d4e91.jpg" },
+                      { name: "Smartwatch silver color modern", image: "https://i.pinimg.com/736x/37/01/61/37016142141eb83fb20312686ba2f2b8.jpg" },
+                      { name: "Blue wallet for men leather material", image: "https://i.pinimg.com/736x/0e/2c/14/0e2c145f1224ef907073d90c7ca2b06f.jpg" },
+                      { name: "Jeans bag for travel for men", image: "https://i.pinimg.com/736x/50/7e/60/507e60816ff15d90467d67fb8a7569db.jpg" },
+                    ][i].image}
+                    alt="Product" // Added alt attribute
                     width={120}
                     height={120}
                     className="w-full h-24 md:h-32 object-cover" />
                   <div className="p-2 md:p-3">
                     <p className="font-semibold text-sm md:text-base">${(Math.random() * 100).toFixed(2)}</p>
-                    <p className="text-xs text-gray-600 mt-1 line-clamp-2">
-                      {[
-                        "T-shirts with multiple colors, for men",
-                        "Jeans shorts for men blue color",
-                        "Brown winter coat medium size",
-                        "Jeans bag for travel for men",
-                        "Leather wallet",
-                        "Canon camera black, 100x zoom",
-                        "Headset for gaming with mic",
-                        "Smartwatch silver color modern",
-                        "Blue wallet for men leather material",
-                        "Jeans bag for travel for men",
-                      ][i]}
-                    </p>
+                    <p className="text-xs text-gray-600 mt-1 line-clamp-2">{[{ name: "T-shirts with multiple colors, for men", image: "https://i.pinimg.com/736x/b3/de/a9/b3dea9e22059f172581946b257836cdb.jpg" },
+                      { name: "Jeans shorts for men blue color", image: "https://i.pinimg.com/736x/fe/e1/2e/fee12e73032d8f37d099bf6a7eb1cbda.jpg" },
+                      { name: "Brown winter coat medium size", image: "https://i.pinimg.com/736x/a6/44/04/a644040311618669e5a197ff4f0f8112.jpg" },
+                      { name: "Jeans bag for travel for men", image: "https://i.pinimg.com/736x/99/1a/a6/991aa6d108eb39790164a5ba4c17a330.jpg" },
+                      { name: "Leather wallet", image: "https://i.pinimg.com/736x/2c/fa/2a/2cfa2aa485c6430ceeedf2a5935cf798.jpg" },
+                      { name: "Canon camera black, 100x zoom", image: "https://i.pinimg.com/736x/c0/fb/b1/c0fbb1bd5b5c6df0e87913927c987ea8.jpg" },
+                      { name: "Headset for gaming with mic", image: "https://i.pinimg.com/736x/07/48/e3/0748e35be71734a6564ae57f769d4e91.jpg" },
+                      { name: "Smartwatch silver color modern", image: "https://i.pinimg.com/736x/37/01/61/37016142141eb83fb20312686ba2f2b8.jpg" },
+                      { name: "Blue wallet for men leather material", image: "https://i.pinimg.com/736x/0e/2c/14/0e2c145f1224ef907073d90c7ca2b06f.jpg" },
+                      { name: "Jeans bag for travel for men", image: "https://i.pinimg.com/736x/50/7e/60/507e60816ff15d90467d67fb8a7569db.jpg" },
+                    ][i].name}</p>
                   </div>
                 </Link>
+
               ))}
             </div>
           </div>
@@ -441,10 +448,10 @@ export default function Home() {
             <h2 className="text-xl font-semibold mb-4">Our extra services</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               {[
-                { title: "Source from Industry Hubs", image: "https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg" },
-                { title: "Customize Your Products", image: "https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg" },
-                { title: "Fast, reliable shipping", image: "https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg" },
-                { title: "Product monitoring", image: "https://i.pinimg.com/736x/2b/c5/a6/2bc5a6a8634fbb69ba0e066aa5676c39.jpg" },
+                { title: "Source from Industry Hubs", image: "https://i.pinimg.com/736x/de/9c/e2/de9ce2b5561297eb17eac9b4e0fa8752.jpg" },
+                { title: "Customize Your Products", image: "https://i.pinimg.com/736x/9a/41/59/9a41597467cd1e0bb75ef5b4dd0535cd.jpg" },
+                { title: "Fast, reliable shipping", image: "https://i.pinimg.com/736x/b1/f2/0d/b1f20da62eb167c120ae6306d923935c.jpg" },
+                { title: "Product monitoring", image: "https://i.pinimg.com/736x/8f/eb/49/8feb4950d0a83ec91e9596d179fd498c.jpg" },
               ].map((service, i) => (
                 <Card key={i} className="relative">
                   <CardContent className="p-0">
